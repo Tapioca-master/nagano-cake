@@ -1,25 +1,18 @@
 Rails.application.routes.draw do
   devise_for :admins
-  devise_for :customers
-  get 'items/index'
-  get 'items/show'
+  devise_for :customers, controllers: {:registrations => 'customers/registrations', :sessions => 'customers/sessions'}
+    sessions
+  }
+  resources :items
   get 'items/about'
-  get 'orders/index'
-  get 'orders/show'
-  get 'addresses/index'
-  get 'addresses/create'
-  get 'addresses/edit'
-  get 'addresses/update'
-  get 'addresses/delete'
-  get 'customers/show'
-  get 'customers/edit'
-  get 'customers/update'
-  get 'customers/exit'
-  get 'cart_items/index'
+
+  resources :orders
+  resources :addresses
+  resources :customers
+  resources :cart_items
   get 'cart_items/info'
   get 'cart_items/confirm'
   get 'cart_items/thanks'
-  get 'cart_items/destroy'
   namespace :admins do
     get 'customers/index'
     get 'customers/show'
