@@ -10,6 +10,35 @@
   </head>
 
   <body>
-    <%= yield %>
+   <header class="navbar navbar-default">
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">NaganoCake</div>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarEexample1">
+            <div class="navbar-right">
+              <ul class="nav navbar-nav">
+                  <li class=""><%= link_to "Home" %></li>
+                  <li class=""><%= link_to "Users" %></li>
+                  <li class=""><%= link_to "Cart" %></li>
+                  <li class=""><%= link_to "logout" %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      </nav>
+    </div>
+    </header>
+      <%= yield %>
+    <footer>
+    </footer>
   </body>
 </html>
