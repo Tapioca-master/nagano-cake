@@ -1,2 +1,33 @@
-<h1>Admins::Items#edit</h1>
-<p>Find me in app/views/admins/items/edit.html.erb</p>
+<h1>商品編集画面</h1>
+<%= form_for [:admins, @item] do |f| %>
+
+	<%= attachment_image_tag @item, :image, fallback: "no_image.jpg"%>
+	<%= f.attachment_field :image %>
+
+	  <div>
+		<label>商品名</label>
+		<%= f.text_field :name %>
+	  </div>
+
+	  <div>
+		<label>商品説明</label>
+		<%= f.text_area :introduction %>
+	  </div>
+	  <div>
+	  	<label>ジャンル</label>
+	  	<%= f.select :genre_id, Genre.all.collect{|g| [g.name, g.id]}, {prompt: '選択してください'}  %>
+	  </div>
+
+	  <div>
+		<label>税抜価格</label>
+		<%= f.text_field :non_tax_price %>円
+	  </div>
+	  <div>
+	  	<label>販売<br>ステータス</label>
+	  	<%= f.select :sales_status, Item.sales_statuses.keys, {prompt: '選択してください'} %>
+	  </div>
+
+	  <div>
+	  	<%= f.submit "変更を保存" %>
+	  </div>
+<% end %>
