@@ -22,7 +22,6 @@ Admin.create!(
   ]
 )
 
-
 Genre.create!(
   [
     {
