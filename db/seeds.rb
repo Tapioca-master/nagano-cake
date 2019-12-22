@@ -12,12 +12,34 @@ Admin.create!(
     {
       email: 'test1@test.com',
       password: '111111',
-      name: 'テスト管理太郎',
+      name: 'テスト管理太郎'
     },
     {
       email: 'test2@test.com',
       password: '222222',
-      name: 'テスト管理花子',
+      name: 'テスト管理花子'
+    }
+  ]
+)
+
+
+Genre.create!(
+  [
+    {
+      name: 'ケーキ',
+      is_active: true
+    },
+    {
+      name: 'プリン',
+      is_active: true
+    },
+    {
+      name: '焼き菓子',
+      is_active: true
+    },
+    {
+      name: 'キャンディ',
+      is_active: true
     }
   ]
 )
