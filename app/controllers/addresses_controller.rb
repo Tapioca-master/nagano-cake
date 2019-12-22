@@ -7,17 +7,13 @@ class AddressesController < ApplicationController
 
   def create
     permission
-    if(current_customer)
-      @address = Address.new(address_params)
-      @address.customer_id = current_customer.id
-      @addresses = Address.all
-      if @address.save
-        redirect_to addresses_path
-      else
-        render action: :index
-      end
+    @address = Address.new(address_params)
+    @address.customer_id = current_customer.id
+    @addresses = Address.all
+    if @address.save
+      redirect_to addresses_path
     else
-      redirect_to new_customer_session_path
+      render action: :index
     end
   end
 
