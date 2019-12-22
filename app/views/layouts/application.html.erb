@@ -28,7 +28,17 @@
                   <li class=""><%= link_to "Home" %></li>
                   <li class=""><%= link_to "Users" %></li>
                   <li class=""><%= link_to "Cart" %></li>
-                  <li class=""><%= link_to "logout" %></li>
+
+                  <!-- ユーザのSessionによって場合わけ（このままだとSessionがないときにCustomerかAdminかの判断ができない） -->
+                  <% if current_admin %>
+                  <li class=""><%= link_to "logout", destroy_admin_session_path, method: :delete %></li>
+                  <% elsif current_customer %>
+                  <li class=""><%= link_to "logout", destroy_customer_session_path, method: :delete %></li>
+                  <% elsif %>
+                  <li class=""><%= link_to "login(Customer)", new_customer_session_path %></li>
+                  <li class=""><%= link_to "login(Admin)", new_admin_session_path %></li>
+                  <% end %>
+
               </ul>
             </div>
           </div>
