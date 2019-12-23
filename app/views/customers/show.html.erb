@@ -1,2 +1,69 @@
-<h1>Customers#show</h1>
-<p>Find me in app/views/customers/show.html.erb</p>
+
+<div class="row">
+<h1>マイページ</h1>
+    <% if @customer.id == current_customer.id %>
+</div>
+<div class="row">
+<ul class="nav navbar-nav"style="">
+    <li class="">
+        <%= "登録情報" %>
+    </li>
+    <li class="">
+        <%= link_to "プロフィール編集", edit_customer_path(@customer) %>
+    </li>
+    <li class="">
+        <%= link_to "パスワードを変更する", edit_customer_password_path(@customer) %>
+    </li>
+</ul>
+</div>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>名前</td>
+            <td><%= "#{current_customer.name_last}　#{current_customer.name_first}" %></td>
+        </tr>
+        <tr>
+            <td>カナ</td>
+            <td><%= "#{current_customer.name_last_kana}　#{current_customer.name_first_kana}" %></td>
+        </tr>
+        <tr>
+            <td>郵便番号</td>
+            <td><%= "#{current_customer.postal_code}" %></td>
+        </tr>
+        <tr>
+            <td>住所</td>
+            <td><%= "#{current_customer.address}" %></td>
+        </tr>
+        <tr>
+            <td>電話番号</td>
+            <td><%= "#{current_customer.phone_number}" %></td>
+        </tr>
+        <tr>
+            <td>メールアドレス</td>
+            <td><%= "#{current_customer.email}" %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="row">
+    <ul class="nav navbar-nav"style="">
+        <li class="">
+            <%= "配送先" %>
+        </li>
+        <li class="">
+            <%= link_to "一覧を見る", addresses_path(@customer) %>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <ul class="nav navbar-nav"style="">
+        <li class="">
+            <%= "注文履歴" %>
+        </li>
+        <li class="">
+            <%= link_to "一覧を見る", orders_path(@customer) %>
+        </li>
+    </ul>
+</div>
