@@ -31,10 +31,10 @@
                                 <%= link_to "Home", items_path %>
                             </li>
                             <li class="">
-                                <%= link_to "#{current_customer.name_last}#{current_customer.name_first}" %>
+                                <%= link_to "#{current_customer.name_last}#{current_customer.name_first}さん" %>
                             </li>
                             <li class="">
-                                <%= link_to "Cart" %>
+                                <%= link_to "Cart", cart_items_path %>
                             </li>
                             <li class="">
                                 <%= link_to "logout", destroy_customer_session_path, method: :delete %>
@@ -42,17 +42,21 @@
                             <!-- Adminがログインしている時 -->
                             <% elsif current_admin %>
                             <li class="">
+                                <%= link_to "#{current_admin.name}さん" %>
+                            </li>
+                            <li class="">
+                                <%= link_to "orders_index", admins_orders_path %>
+                            </li>
+                            <li class="">
                                 <%= link_to "logout", destroy_admin_session_path, method: :delete %>
                             </li>
-                            <% elsif current_customer %>
                             <!-- いずれもログインしていない時 -->
                             <% else %>
-                            <!-- ログインのCustomerとAdminをどのように分けるか？(aki) -->
                             <li class="">
                                 <%= link_to "login(Customer)", new_customer_session_path %>
                             </li>
                             <li class="">
-                                <%= link_to "login(Admin)", new_admin_session_path %>
+                                <%= link_to "Signup", new_customer_registration_path %>
                             </li>
                             <% end %>
                         </ul>
@@ -65,6 +69,7 @@
     </header>
     <%= yield %>
     <footer>
+            Copyright ©　Nagano Cake
     </footer>
 </body>
 
