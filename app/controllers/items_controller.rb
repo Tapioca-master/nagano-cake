@@ -12,13 +12,10 @@ class ItemsController < ApplicationController
   	@genres = Genre.all
   	@item = Item.find(params[:id])
   	@cart_item = CartItem.new(item_id: @item.id)
+    @cart_item.customer_id = current_customer.id
+    @cart_item.item_id = @item.id
   end
 
-  def create
-  	@item = Item.find_by(params[:id])
-  	@customer = Customer.
-    redirect_to cart_item_path(current_user.id)
-  end
   def about
   end
 end
