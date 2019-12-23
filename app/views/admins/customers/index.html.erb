@@ -9,7 +9,7 @@
     <% @customers.each do |customer| %>
     <tr>
     	<td><%= customer.id %></td>
-    	<td><%= link_to "#{customer.name_first}" + "#{customer.name_last}", admins_customer_path(customer) %></td>
+    	<td><%= link_to "#{customer.name_last}#{customer.name_first}", admins_customer_path(customer) %></td>
     	<td><%= customer.email %></td>
     	<td><%= customer.is_active ? "有効" : "退会済" %></td>
     </tr>
