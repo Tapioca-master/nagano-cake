@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :items
   get 'items/about'
+  # Customerトップでのジャンル指定用
+  get 'items/genre/:id' => 'items#index', as: 'items_genre'
 
   resources :customers
   resources :addresses

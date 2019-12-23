@@ -31,7 +31,7 @@
                                 <%= link_to "Home", items_path %>
                             </li>
                             <li class="">
-                                <%= link_to "#{current_customer.name_last}#{current_customer.name_first}さん" %>
+                                <%= link_to "#{current_customer.name_last}#{current_customer.name_first}さん", customer_path(current_customer) %>
                             </li>
                             <li class="">
                                 <%= link_to "Cart", cart_items_path %>
