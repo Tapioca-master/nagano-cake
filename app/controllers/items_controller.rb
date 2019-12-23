@@ -12,6 +12,8 @@ class ItemsController < ApplicationController
   	@genres = Genre.all
   	@item = Item.find(params[:id])
   	@cart_item = CartItem.new(item_id: @item.id)
+    @cart_item.customer_id = current_customer.id
+    @cart_item.item_id = @item.id
   end
 
   def about
