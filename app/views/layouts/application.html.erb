@@ -1,54 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>NaganoCake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
 
-  <body>
-   <header class="navbar navbar-default">
-      <nav class="navbar">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <div class="navbar-brand">NaganoCake</div>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarEexample1">
-            <div class="navbar-right">
-              <ul class="nav navbar-nav">
-                  <li class=""><%= link_to "Home" %></li>
-                  <li class=""><%= link_to "Users" %></li>
-                  <li class=""><%= link_to "Cart" %></li>
-
-                  <!-- ユーザのSessionによって場合わけ（このままだとSessionがないときにCustomerかAdminかの判断ができない） -->
-                  <% if current_admin %>
-                  <li class=""><%= link_to "logout", destroy_admin_session_path, method: :delete %></li>
-                  <% elsif current_customer %>
-                  <li class=""><%= link_to "logout", destroy_customer_session_path, method: :delete %></li>
-                  <% elsif %>
-                  <li class=""><%= link_to "login(Customer)", new_customer_session_path %></li>
-                  <li class=""><%= link_to "login(Admin)", new_admin_session_path %></li>
-                  <% end %>
-
-              </ul>
+<body>
+    <header class="navbar navbar-default">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand">NaganoCake</div>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarEexample1">
+                    <div class="navbar-right">
+                        <ul class="nav navbar-nav">
+                            <!-- Customerがログインしている時 -->
+                            <% if current_customer %>
+                            <li class="">
+                                <%= link_to "Home", items_path %>
+                            </li>
+                            <li class="">
+                                <%= link_to "#{current_customer.name_last}#{current_customer.name_first}" %>
+                            </li>
+                            <li class="">
+                                <%= link_to "Cart" %>
+                            </li>
+                            <li class="">
+                                <%= link_to "logout", destroy_customer_session_path, method: :delete %>
+                            </li>
+                            <!-- Adminがログインしている時 -->
+                            <% elsif current_admin %>
+                            <li class="">
+                                <%= link_to "logout", destroy_admin_session_path, method: :delete %>
+                            </li>
+                            <% elsif current_customer %>
+                            <!-- いずれもログインしていない時 -->
+                            <% else %>
+                            <!-- ログインのCustomerとAdminをどのように分けるか？(aki) -->
+                            <li class="">
+                                <%= link_to "login(Customer)", new_customer_session_path %>
+                            </li>
+                            <li class="">
+                                <%= link_to "login(Admin)", new_admin_session_path %>
+                            </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
             </div>
-          </div>
+            </div>
+        </nav>
         </div>
-      </div>
-      </nav>
-    </div>
     </header>
-      <%= yield %>
+    <%= yield %>
     <footer>
     </footer>
-  </body>
+</body>
+
 </html>
