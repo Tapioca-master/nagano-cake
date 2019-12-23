@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :items
   get 'items/about'
 
+  resources :customers
   resources :addresses
   resources :cart_items
   get 'cart_items/info'
