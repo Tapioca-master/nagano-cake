@@ -1,2 +1,31 @@
+<<<<<<< Updated upstream
 <h1>Orders#index</h1>
 <p>Find me in app/views/orders/index.html.erb</p>
+=======
+<h3>注文履歴一覧</h3>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>注文日</th>
+			<th>配送先</th>
+      		<th>注文商品</th>
+      		<th>支払い金額</th>
+        	<th>ステータス</th >
+      		<th>注文詳細</th>
+        </tr>
+        <% @orders.each do |orders| %>
+        <tr>
+            <td><%= orders.created_at('%Y%m%d') %></td>
+            <td><%= orders.postal_code %><br>
+            	<%= orders.ship_address %><br>
+            	<%= orders.ship_name %></td>
+            <td><%= order_items.order_id %></td>
+            <td><%= orders.shipping + order_items.amount + order_items.tax_price %></td>
+            <td><%= orders.order_status %></td>
+            <td><%=link_to "表示する" %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+>>>>>>> Stashed changes
