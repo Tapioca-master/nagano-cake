@@ -2,7 +2,7 @@ class AddressesController < ApplicationController
   def index
     permission
     @address = Address.new
-    @addresses = Address.all
+    @addresses = Address.where(customer_id: current_customer)
   end
 
   def create

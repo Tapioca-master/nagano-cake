@@ -1,10 +1,7 @@
 class OrdersController < ApplicationController
   def index
-<<<<<<< Updated upstream
-=======
-  	  @orders = Order.all
+  	  @orders = Order.where(customer_id:  current_customer.id)
   	  @order_items = OrderItem.where(customer_id: current_customer.id)
->>>>>>> Stashed changes
   end
   def show
   end

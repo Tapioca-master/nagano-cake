@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-        	<p>ジャンル検索</p>
+            <p>ジャンル検索</p>
             <ul class="list-group">
                 <% @genres.each do |genre| %>
                 <li class="list-group-item">
@@ -17,14 +17,19 @@
             </p>
             <div>
                 <% @items.each do |item| %>
-                <%= attachment_image_tag item, :image, :fill, 150, 100, format: 'jpeg', fallback: "no_image.jpg", size:'150x100' %>
-                <p>
-                    <%= link_to item.name, item_path(item) %>
-                </p>
-                <p>
-                    <%= "¥#{((item.non_tax_price * 1.1).floor).to_s(:delimited)}" %>
-                </p>
+                <div style="float: left;">
+                    <%= attachment_image_tag item, :image, :fill, 230, 150, format: 'jpeg', fallback: "no_image.jpg", size:'230x150' %>
+                    <p>
+                        <%= link_to item.name, item_path(item) %>
+                    </p>
+                    <p>
+                        <%= "¥#{((item.non_tax_price * 1.1).floor).to_s(:delimited)}" %>
+                    </p>
+                </div>
                 <% end %>
+                <div style="clear: both;">
+                    <%= paginate @items %>
+                </div>
             </div>
         </div>
     </div>
