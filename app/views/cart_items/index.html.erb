@@ -1,10 +1,21 @@
-
-<table>
-  <h1>ショッピングカート</h1>
+<h1>ショッピングカート</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>商品名</th>
+			<th>紹介</th>
+			<th>個数</th>
+			<th>価格</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @cart_items.each do |item| %>
+			<tr>
+				<td><%= item.item.name %></td>
+				<td><%= item.item.introduction %></td>
+				<td><%= item.amount %></td>
+				<td><%= "¥#{item.item.non_tax_price*item.amount}（税込）" * 1.1 %></td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
-<% @cart_items.each do |item| %>
-<p><%= item.item.name %></p>
-<p><%= item.item.introduction %></p>
-<p><%= "¥#{item.item.non_tax_price}（税込）" * 1.1 %></p>
-<% end %>
-
