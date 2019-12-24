@@ -10,11 +10,12 @@ Rails.application.routes.draw do
   resources :orders
   resources :customers
   resources :addresses
-  resources :cart_items
-  resources :order_items
+
   get 'cart_items/info'
+  post 'cart_items/confirm'
   get 'cart_items/confirm'
   get 'cart_items/thanks'
+  resources :cart_items
 
   namespace :admins do
     resources :customers
