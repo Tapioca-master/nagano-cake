@@ -10,12 +10,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :customers
   resources :addresses
-<<<<<<< HEAD
 
-=======
-  resources :cart_items
-  resources :order_items
->>>>>>> e5f16b2b11cdca7bd880b165f98b144f973b048f
   get 'cart_items/info'
   post 'cart_items/confirm'
   get 'cart_items/confirm'
