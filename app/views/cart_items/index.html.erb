@@ -3,19 +3,23 @@
 	<thead>
 		<tr>
 			<th>商品名</th>
-			<th>紹介</th>
+			<th>単価(税込)</th>
 			<th>個数</th>
-			<th>価格</th>
+			<th>小計</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<% @cart_items.each do |item| %>
 			<tr>
 				<td><%= item.item.name %></td>
-				<td><%= item.item.introduction %></td>
+				<td><%= "¥#{item.item.non_tax_price}（税込）" * 1.1 %></td>
 				<td><%= item.amount %></td>
 				<td><%= "¥#{item.item.non_tax_price*item.amount}（税込）" * 1.1 %></td>
+				<td><%= button_to '削除', cart_item_path(item), method: :delete, data: {confirm: '商品を削除しますか？'}%></td>
+
 			</tr>
 		<% end %>
+		<%= button_to 'カートを空にする', empty_cart_items_path, method: :delete, data: {confirm: 'カートを削除してよろしいですか？'}, class: 'fbtn' %>
 	</tbody>
 </table>
