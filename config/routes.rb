@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :customers
   resources :addresses
   resources :cart_items
+  resources :order_items
   get 'cart_items/info'
   get 'cart_items/confirm'
   get 'cart_items/thanks'
