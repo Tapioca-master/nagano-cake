@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :customers
   resources :addresses
+  resources :order_items
 
   get 'cart_items/info'
   post 'cart_items/confirm'

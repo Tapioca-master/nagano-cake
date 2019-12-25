@@ -23,7 +23,6 @@ class Admins::OrdersController < ApplicationController
 		if @order.update(order_params)
   		# order_statusの変更に連動するproduction_statusの変更(aki)
   		order_items = OrderItem.where(order_id: params[:id])
-  		binding.pry
 
   		if @order.order_status.to_s == "入金確認" and order_items.find_by(production_status: :着手不可)
   			order_items.update(production_status: :製作待ち)
