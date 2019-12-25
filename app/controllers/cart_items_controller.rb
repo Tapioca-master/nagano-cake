@@ -21,16 +21,39 @@ class CartItemsController < ApplicationController
   end
 
   def info
-
+    @order = Order.new
   end
 
   def confirm
+    #binding.pry
+    if params[:ship_address] == "registered_address"
+      @address = Address.find(params[:ship_name].to_i)
+    elsif params[:ship_address] == "new_address"
+      @address = Address.new(
+          address: params[:address],
+          postal_code: params[:postal_code],
+          name: params[:name]
+        )
+      @address.save
+    else
+      @address = params[:ship_address]
+    end
+    @cart_items = current_customer.cart_items
   end
 
   def thanks
   end
 
   def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+    redirect_to cart_items_path
+  end
+
+  def empty
+    @cart_item = CartItem.all
+    @cart_item.delete_all
+    redirect_to items_path
   end
 
  private
