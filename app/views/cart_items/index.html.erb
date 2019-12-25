@@ -1,25 +1,36 @@
+<div class= "container">
 <h1>ショッピングカート</h1>
-<table class="table">
-	<thead>
-		<tr>
-			<th>商品名</th>
-			<th>単価(税込)</th>
-			<th>個数</th>
-			<th>小計</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @cart_items.each do |item| %>
+	<table class="table">
+		<thead>
 			<tr>
-				<td><%= item.item.name %></td>
-				<td><%= "¥#{item.item.non_tax_price}（税込）" * 1.1 %></td>
-				<td><%= item.amount %></td>
-				<td><%= "¥#{item.item.non_tax_price*item.amount}（税込）" * 1.1 %></td>
-				<td><%= button_to '削除', cart_item_path(item), method: :delete, data: {confirm: '商品を削除しますか？'}%></td>
-
+				<th>商品名</th>
+				<th>単価(税込)</th>
+				<th>個数</th>
+				<th>小計</th>
+				<th></th>
 			</tr>
-		<% end %>
-		<%= button_to 'カートを空にする', empty_cart_items_path, method: :delete, data: {confirm: 'カートを削除してよろしいですか？'}, class: 'fbtn' %>
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			<%= @total = 0 %>
+			<% @cart_items.each do |item| %>
+				<tr>
+					<td><%= item.item.name %></td>
+					<td><%= "¥#{item.item.non_tax_price}（税込）" * 1.1 %></td>
+					<td>
+						<%= form_for item do |f| %>
+						  <%= f.text_field :amount %>
+						  <%= f.submit "変更", class: 'btn btn-primary' %>
+						<% end %>
+					<td><%= "¥#{item.item.non_tax_price*item.amount}（税込）" * 1.1 %></td>
+					<td><%= button_to '削除する', cart_item_path(item), method: :delete, data: {confirm: '商品を削除しますか？'}, class: 'btn btn-danger'%></td>
+				</tr>
+				<tr>
+				    <td><%= @total = @total + item.item.non_tax_price %></td>
+
+			<% end %>
+			<%= link_to "買い物を続ける", items_path, class: 'btn btn-primary'%>
+			<%= @total %>
+			<%= button_to 'カートを空にする', empty_cart_items_path, method: :delete, data: {confirm: 'カートを削除してよろしいですか？'},  class: 'btn btn-danger pull-right' %>
+		</tbody>
+	</table>
+</div>
