@@ -690,7 +690,7 @@ Order.create!(
   [
     {
       customer_id: 1,
-      order_status: '入金待ち',
+      order_status: :入金待ち,
       shipping: 800,
       ship_name: '梅原義昭',
       ship_address: '沖縄県島尻郡座間味村阿佐2-11',
@@ -699,7 +699,7 @@ Order.create!(
     },
     {
       customer_id: 1,
-      order_status: '入金確認',
+      order_status: :入金確認,
       shipping: 800,
       ship_name: '杉山美優',
       ship_address: '鹿児島県南九州市知覧町瀬世4-3',
@@ -708,7 +708,7 @@ Order.create!(
     },
     {
       customer_id: 2,
-      order_status: '発送準備中',
+      order_status: :発送準備中,
       shipping: 800,
       ship_name: '橋爪泰賀',
       ship_address: '北海道釧路市阿寒町下仁々志別3-8-18',
@@ -717,7 +717,7 @@ Order.create!(
     },
     {
       customer_id: 3,
-      order_status: '発送済',
+      order_status: :発送済み,
       shipping: 800,
       ship_name: '梅田優晴',
       ship_address: '京都府京都市右京区嵯峨中又町4-4プラザ嵯峨中又町312',
@@ -732,42 +732,42 @@ OrderItem.create!(
     {
       order_id: 1,
       item_id: 1,
-      production_status: 1,
+      production_status: :製作待ち,
       amount: 1,
       tax_price: 200,
     },
     {
       order_id: 1,
       item_id: 2,
-      production_status: 1,
+      production_status: :製作待ち,
       amount: 1,
       tax_price: 250,
     },
     {
       order_id: 1,
       item_id: 3,
-      production_status: 1,
+      production_status: :製作待ち,
       amount: 1,
       tax_price: 150,
     },
     {
       order_id: 2,
       item_id: 1,
-      production_status: 1,
+      production_status: :製作待ち,
       amount: 5,
       tax_price: 200,
     },
     {
       order_id: 3,
       item_id: 2,
-      production_status: 4,
+      production_status: :製作完了,
       amount: 10,
       tax_price: 250,
     },
     {
       order_id: 4,
       item_id: 1,
-      production_status: 4,
+      production_status: :製作完了,
       amount: 5,
       tax_price: 200,
     }

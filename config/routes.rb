@@ -6,16 +6,21 @@ Rails.application.routes.draw do
   get 'items/about'
   # Customerトップでのジャンル指定用
   get 'items/genre/:id' => 'items#index', as: 'items_genre'
-
   resources :orders
   resources :customers
   resources :addresses
+  resources :order_items
 
   get 'cart_items/info'
   post 'cart_items/confirm'
   get 'cart_items/confirm'
   get 'cart_items/thanks'
-  resources :cart_items
+  resources :cart_items do
+    collection do
+      delete :empty
+    end
+  end
+
 
   namespace :admins do
     resources :customers
