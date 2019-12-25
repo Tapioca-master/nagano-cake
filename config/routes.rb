@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   devise_for :customers, controllers: {:registrations => 'customers/registrations', :sessions => 'customers/sessions'}
   devise_for :admins, controllers: {:sessions => 'admins/sessions'}
-
-  resources :items
+  # Aboutページ用
   get 'items/about'
   # Customerトップでのジャンル指定用
   get 'items/genre/:id' => 'items#index', as: 'items_genre'
+  resources :items
   resources :orders
   resources :customers
   resources :addresses
