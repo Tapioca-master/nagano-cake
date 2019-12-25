@@ -1,7 +1,7 @@
 class Admins::OrdersController < ApplicationController
 	def index
-		# TOPページからのリンク
-		if params[:key] == "today"(aki)
+		# TOPページからのリンク(aki)
+		if params[:key] == "today"
 			@orders = Order.where(created_at: Time.zone.now.all_day)
 			@order_items = OrderItem.where(created_at: Time.zone.now.all_day)
 		# 一意のCustomerからのリンク(aki)
