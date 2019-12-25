@@ -1,13 +1,25 @@
 Rails.application.routes.draw do
+
   devise_for :customers, controllers: {:registrations => 'customers/registrations', :sessions => 'customers/sessions'}
   devise_for :admins, controllers: {:sessions => 'admins/sessions'}
+
+  # redirect_toにてsign_outを使用するために必要
+  devise_scope :customer do
+    get '/customers/sign_out' => 'devise/sessions#destroy'
+  end
+
   # Aboutページ用
   get 'items/about'
+
   # Customerトップでのジャンル指定用
   get 'items/genre/:id' => 'items#index', as: 'items_genre'
+
   resources :items
   resources :orders
+  # CUstomer退会確認画面用
+  get 'customers/exit'
   resources :customers
+
   resources :addresses
   resources :order_items
 
@@ -21,40 +33,24 @@ Rails.application.routes.draw do
     end
   end
 
+  root 'items#index'
+
 
   namespace :admins do
     resources :customers
-    # get 'customers/index'
-    # get 'customers/show'
-    # get 'customers/personal'
-    # get 'customers/edit'
-    # get 'customers/update'
   end
 
   namespace :admins do
     resources :orders
-    # get 'orders/index'
-    # get 'orders/today'
-    # get 'orders/update'
   end
 
   namespace :admins do
     resources :genres
-    # get 'genres/index'
-    # get 'genres/new'
-    # get 'genres/edit'
-    # patch 'genres/update'
-    # post 'genres/create'
   end
 
   namespace :admins do
     resources :items
-    # get 'items/index'
-    # get 'items/create'
-    # get 'items/new'
-    # get 'items/show'
-    # get 'items/edit'
-    # get 'items/update'
+
   end
   get 'admins/top'
 
@@ -69,5 +65,4 @@ Rails.application.routes.draw do
     get 'sessions/create'
     get 'sessions/destroy'
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
