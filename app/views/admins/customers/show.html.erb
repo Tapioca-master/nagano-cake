@@ -61,5 +61,5 @@
     </div>
     <%= link_to "編集する", edit_admins_customer_path(@customer), class: "btn btn-primary" %>
     <!-- リンク先はroutes設定後 -->
-    <%= link_to "注文履歴一覧を見る", admins_orders_path, class: "btn btn-primary" %>
+    <%= link_to "注文履歴一覧を見る", admins_orders_path(key: @customer.id), class: "btn btn-primary" %>
 </div>
