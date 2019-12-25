@@ -1,7 +1,10 @@
 class Admins::CustomersController < ApplicationController
+  # kaminari表示数設定(aki)
+  PER = 10
+
   def index
     permission
-    @customers = Customer.all
+    @customers = Customer.all.page(params[:page]).per(PER)
   end
 
   def show
