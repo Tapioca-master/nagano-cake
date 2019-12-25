@@ -6,7 +6,8 @@
 <div class="row">
     <div class="col-md-12">
         <%= form_for @genre, :url => { :controller => :genres, :action => :create } do |f| %>
-        <p>ジャンル</p>
+        <p style="display: inline-block;" >
+        </style>ジャンル</p>
         <%= f.text_field :name %>
         <label>
             <%= f.radio_button :is_active, true %>有効</label>
@@ -37,7 +38,7 @@
                     </p>
                 </td>
                 <td>
-                    <%= link_to "編集する", edit_admins_genre_path(genre) %>
+                    <%= link_to "編集する", edit_admins_genre_path(genre), class: "btn btn-primary" %>
                 </td>
             </tr>
             <% end %>
