@@ -1,15 +1,26 @@
 class Admins::OrdersController < ApplicationController
-  def index
-  	@orders = Order.all
-  	@order_items = OrderItem.all
-  end
+	def index
+		# TOPページからのリンク
+		if params[:key] == "today"(aki)
+			@orders = Order.where(created_at: Time.zone.now.all_day)
+			@order_items = OrderItem.where(created_at: Time.zone.now.all_day)
+		# 一意のCustomerからのリンク(aki)
+		elsif params[:key] =~ /^[0-9]+$/
+			@orders = Order.where(customer_id: params[:key])
+			@order_items = OrderItem.all
+		# その他（ヘッダ等）からのリンク(aki)
+		else
+			@orders = Order.all
+			@order_items = OrderItem.all
+		end
+	end
 
-  def today
-  end
+	def today
+	end
 
-  def update
-  	@order = Order.find(params[:id])
-  	if @order.update(order_params)
+	def update
+		@order = Order.find(params[:id])
+		if @order.update(order_params)
   		# order_statusの変更に連動するproduction_statusの変更(aki)
   		order_items = OrderItem.where(order_id: params[:id])
   		binding.pry
