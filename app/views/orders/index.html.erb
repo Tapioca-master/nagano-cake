@@ -29,9 +29,9 @@
             <% end %>
             <%= sum + order.shipping %>円</td>
             <td><%= order.order_status %></td>
-            <td><%=link_to "表示する", order_path(current_customer) %></td>
+            <td><%=link_to "表示する", order_path(order) %></td>
         </tr>
-<% end %>
+           <% end %>
     </tbody>
 </table>
 
