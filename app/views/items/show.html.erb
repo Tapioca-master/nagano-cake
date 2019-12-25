@@ -21,7 +21,7 @@
                 <%= @item.introduction %>
             </p>
             <p>
-                <%= "¥#{@item.non_tax_price}（税込）" * 1.1 %>
+                <%= "¥#{@item.non_tax_price * 1.1}（税込）" %>
             </p>
             <%= form_for @cart_item do |f| %>
               <%= f.hidden_field :item_id, :value => @item.id %>
