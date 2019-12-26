@@ -5,4 +5,8 @@ class OrdersController < ApplicationController
   end
   def show
   end
+
+  def create
+  	byebug
+  end
 end
