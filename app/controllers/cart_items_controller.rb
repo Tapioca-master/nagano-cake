@@ -70,12 +70,14 @@ class CartItemsController < ApplicationController
   end
 
  private
- def cart_exist?(item_id)
-  cart = CartItem.find_by(customer_id: current_customer.id, item_id: item_id)
-  cart.present?
- end
- def cart_item_params
-  params.require(:cart_item).permit(:amount, :item_id, :customer_id)
 
- end
+  def cart_exist?(item_id)
+    cart = CartItem.find_by(customer_id: current_customer.id, item_id: item_id)
+    cart.present?
+  end
+  def cart_item_params
+    params.require(:cart_item).permit(:amount, :item_id, :customer_id)
+  end
+
 end
+
