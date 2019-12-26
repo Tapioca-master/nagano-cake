@@ -1,2 +1,10 @@
-<h1>Customers#exit</h1>
-<p>Find me in app/views/customers/exit.html.erb</p>
+<p>本当に退会しますか？</p>
+<p>退会すると、会員登録情報やこれまでの購入履歴が閲覧できなくなります。退会する場合は、「退会する」をクリックしてください。</p>
+<div>
+<%= link_to "退会しない", customer_path(current_customer), class: "btn btn-primary" %>
+</div>
+<div>
+<%= form_for @customer do |f| %>
+<%= f.submit "退会する", class: "btn btn-danger" %>
+<% end %>
+</div>

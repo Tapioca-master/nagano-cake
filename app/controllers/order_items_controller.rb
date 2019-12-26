@@ -1,14 +1,27 @@
 class OrderItemsController < ApplicationController
 	def update
-		@order_item = OrderItem.find(params[:id])
-		if @order_item.update(order_item_params)
-			redirect_to admins_order_path(@order_item.order_id)
+
+		order_item = OrderItem.find(params[:id])
+
+		if order_item.update(order_item_params)
+			# production_statusの変更に連動するorder_statusの変更(aki)
+			order_items = OrderItem.where(order_id: order_item.order_id)
+			order = Order.find_by(id: order_item.order_id)
+
+			if order_items.find_by(production_status: :製作中)
+				order.update(order_status: :製作中)
+			end
+			if order_items.where(production_status: :製作完了).count == order_items.count
+				order.update(order_status: :発送準備中)
+			end
+			redirect_to admins_order_path(order)
 		else
-			# render先に必要な情報を取得
-			@order = Order.find(id: @order_item.order_id)
+			# render先に必要な情報を取得(aki)
+			@order = Order.find(id: order_item.order_id)
 			@order_items = OrderItem.where(order_id: @order.id)
 			render admins_orders_path
 		end
+
 	end
 
 	private

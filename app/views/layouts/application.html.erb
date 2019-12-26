@@ -21,7 +21,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <div class="navbar-brand">NaganoCake</div>
+                    <div class="navbar-brand">
+                        <%= link_to "NaganoCake", items_path %></div>
                 </div>
                 <div class="collapse navbar-collapse" id="navbarEexample1">
                     <div class="navbar-right">
@@ -38,7 +39,10 @@
                                 <%= link_to "Cart", cart_items_path %>
                             </li>
                             <li class="">
-                                <%= link_to "logout", destroy_customer_session_path, method: :delete %>
+                                <%= link_to "Logout", destroy_customer_session_path, method: :delete %>
+                            </li>
+                            <li class="">
+                                <%= link_to "About", items_about_path %>
                             </li>
                             <!-- Adminがログインしている時 -->
                             <% elsif current_admin %>
@@ -46,7 +50,13 @@
                                 <%= link_to "#{current_admin.name}さん" %>
                             </li>
                             <li class="">
-                                <%= link_to "orders_index", admins_orders_path %>
+                                <%= link_to "Genres", admins_genres_path %>
+                            </li>
+                            <li class="">
+                                <%= link_to "Customers", admins_customers_path %>
+                            </li>
+                            <li class="">
+                                <%= link_to "Orders", admins_orders_path %>
                             </li>
                             <li class="">
                                 <%= link_to "logout", destroy_admin_session_path, method: :delete %>
@@ -54,10 +64,13 @@
                             <!-- いずれもログインしていない時 -->
                             <% else %>
                             <li class="">
-                                <%= link_to "login(Customer)", new_customer_session_path %>
+                                <%= link_to "Login", new_customer_session_path %>
                             </li>
                             <li class="">
                                 <%= link_to "Signup", new_customer_registration_path %>
+                            </li>
+                            <li class="">
+                                <%= link_to "About", items_about_path %>
                             </li>
                             <% end %>
                         </ul>
