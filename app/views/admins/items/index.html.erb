@@ -1,39 +1,51 @@
-<h2>商品一覧画面</h2>
-
-<%= link_to "+", new_admins_item_path %>
-
-<table>
-	<thead>
-		<tr>
-			<th>商品ID</th>
-			<th>商品名</th>
-			<th>税抜価格</th>
-			<th>ジャンル</th>
-			<th>ステータス</th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<% @items.each do |item| %>
-		<tr>
-			<td>
-				<%= item.id %>
-			</td>
-			<td>
-				<%= link_to item.name, admins_item_path(item.id) %>
-			</td>
-			<td>
-				<%= item.non_tax_price %>
-			</td>
-			<td>
-				<%= item.genre.name %>
-			</td>
-			<td>
-				<%= item.sales_status %>
-			</td>
-		</tr>
-		<% end %>
-	</tbody>
-</table>
-<%= paginate @items, class: "paginate" %>
-
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h2>商品一覧画面</h2>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <%= link_to "+", new_admins_item_path %>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>商品ID</th>
+                    <th>商品名</th>
+                    <th>税抜価格</th>
+                    <th>ジャンル</th>
+                    <th>ステータス</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @items.each do |item| %>
+                <tr>
+                    <td>
+                        <%= item.id %>
+                    </td>
+                    <td>
+                        <%= link_to item.name, admins_item_path(item.id) %>
+                    </td>
+                    <td>
+                        <%= item.non_tax_price %>
+                    </td>
+                    <td>
+                        <%= item.genre.name %>
+                    </td>
+                    <td>
+                        <%= item.sales_status %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <%= paginate @items, class: "paginate" %>
+    <div class="col-md-2"></div>
+</div>
