@@ -26,7 +26,8 @@ class CartItemsController < ApplicationController
   def confirm
     # binding.pry
     if params[:ship_address] == "registered_address"
-      @address = Address.find(params[:name].to_i)
+      @my_addresses = Address.where(customer_id: current_customer.id)
+      @address = @my_addresses.find(params[:ship_nummber].to_i)
     elsif params[:ship_address] == "new_address"
       @address = Address.new(
           address: params[:address],
@@ -40,34 +41,36 @@ class CartItemsController < ApplicationController
     @payment = params[:payment]
     @cart_items = current_customer.cart_items
     @tax = 1.1
-    @shipping = 800
-
     end
 
   def thanks
-    @order_item.save
+    cart_items = current_customer.cart_items
+    order = Order.new
+    order.shipping = 800
+    order.ship_name = params[:name]
+    order.ship_address = params[:ship_address]
+    order.postal_code = params[:postal_code]
+    order.payment = params[:payment]
+    order.save
+  binding.pry
+    cart_items.each do |item|
+      order_item = OrderItem.new
+      order_item.order_id = order.id
+      order_item.id = item.item.id
+      order_item.amount = item.amount
+      order_item.tax_price = item.item.non_tax_price*1.1
+      order_item.save
+
+    CartItem.find(item.id).destroy
+    end
 
   end
 
   def destroy
-    @cart_item = CartItem.find(params[:id])
-    @cart_item.destroy
-    redirect_to cart_items_path
-  end
-
-  def update
-    @amount = CartItem.find(params[:id])
-    @amount.update(cart_item_params)
-    redirect_to cart_items_path
-  end
-
-  def empty
-    @cart_item = CartItem.all
-    @cart_item.delete_all
-    redirect_to items_path
   end
 
  private
+
   def cart_exist?(item_id)
     cart = CartItem.find_by(customer_id: current_customer.id, item_id: item_id)
     cart.present?
@@ -78,5 +81,3 @@ class CartItemsController < ApplicationController
 
 end
 
-
-      #カートの中身がnullのときにifで商品ページにリダイレクトをinfoに書く
