@@ -7,4 +7,8 @@ class OrdersController < ApplicationController
   	  @order = Order.find(params[:id])
   	  @order_item = OrderItem.where(order_id: params[:id])
   end
+
+  def create
+  	byebug
+  end
 end
