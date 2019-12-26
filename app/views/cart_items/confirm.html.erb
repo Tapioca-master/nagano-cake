@@ -1,6 +1,8 @@
+
 <h2>注文情報確認</h2>
 
-<table>
+
+<table class="table">
 	<tbody>
 		<tr>
 			<th>商品名</th>
@@ -8,44 +10,44 @@
 			<th>数量</th>
 			<th>小計</th>
 		</tr>
-
+		<% total = 0 %>
 		<% @cart_items.each do |item| %>
 		<tr>
-			<td></td>
-			<td><%= ((item.item.non_tax_price * @tax).floor).to_s(:delimited) %></td>
+			<td><%= item.item.name %></td>
+			<td><%= tax_price = ((item.item.non_tax_price * @tax).floor).to_s(:delimited) %>
+				
+			</td>
 			<td><%= item.amount %></td>
-			<td><%= ((item.item.non_tax_price * @tax * item.amount).floor).to_s(:delimited) %></td>
+			<td>
+			</td>
 		</tr>
+		<% total = total + (item.item.non_tax_price*item.amount*@tax).round %>
 		<% end %>
 	</tbody>
 </table>
 
-<%= form_for :@order, url: cart_items_thanks_path do |f| %>
-<table>
+
+<table class="table">
 	<tbody>
 		<tr>
-			<th>送料</th>
-			<td>800</td>
+		  <th>送料</th>
+		  <td>800</td>
 		</tr>
 		<tr>
-			<th>商品合計</th>
-			<td>
-
-			</td>
+		  <th>商品合計</th>
+		  <td>
+			<%= total %>
+		  </td>
 		</tr>
 		<tr>
-			<th>請求金額</th>
-			<td>
-
-			</td>
+		  <th>請求金額</th>
+		  <td><%= 800 + total %></td>
 		</tr>
 	</tbody>
 </table>
 
-	<p>支払方法 <%= @payment %><%= f.hidden_field @payment %></p>
-	<p>お届け先 <%= @ship_address %><%= f.hidden_field :postal_code %><%= f.hidden_field :address %><br>
-	<%= f.hidden_field :name %></p>
+	<p>支払方法 <%= @payment %></p>
+	<p>お届け先 <%= @address.postal_code + " " + @address.address + " " + @address.name %>
+	</p>
 
-	<%= f.submit "購入を確定する" %>
-
-<% end %>
+	<%= link_to "購入を確定する", cart_items_thanks_path, ship_name: params[:name], ship_address: params[:ship_address], postal_code: params[:postal_code], payment: params[:payment] %>
