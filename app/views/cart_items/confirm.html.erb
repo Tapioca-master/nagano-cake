@@ -19,6 +19,7 @@
 			</td>
 			<td><%= item.amount %></td>
 			<td>
+				<%= ((item.item.non_tax_price * @tax).floor) * item.amount %>
 			</td>
 		</tr>
 		<% total = total + (item.item.non_tax_price*item.amount*@tax).round %>
@@ -47,7 +48,7 @@
 </table>
 
 	<p>支払方法 <%= @payment %></p>
-	<p>お届け先 <%= @address.postal_code + " " + @address.address + " " + @address.name %>
+	<p>お届け先 <%= "#{@postal_code} #{@address} #{@name}" %>
 	</p>
 
-	<%= link_to "購入を確定する", cart_items_thanks_path, ship_name: params[:name], ship_address: params[:ship_address], postal_code: params[:postal_code], payment: params[:payment] %>
+	<%= link_to "購入を確定する", cart_items_thanks_path(:ship_name => @name, :address => @address, :postal_code => @postal_code, :payment => @payment) %>
