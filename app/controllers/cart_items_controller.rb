@@ -74,7 +74,7 @@ class CartItemsController < ApplicationController
       order_item.tax_price = (item.item.non_tax_price*1.1).round
       order_item.production_status = :着手不可
       order_item.save
-binding.pry
+
     CartItem.find(item.id).destroy
     end
 
