@@ -4,5 +4,5 @@ class Address < ApplicationRecord
 	validates :customer_id, presence: true
 	validates :name, presence: true
 	validates :address, presence: true
-	validates :postal_code, presence: true, format: {with: /\A[0-9]{3}-[0-9]{4}\z/}
+	validates :postal_code, presence: true, format: {with: /\A[0-9]{7}\z/}
 end
