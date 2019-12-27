@@ -6,7 +6,7 @@ class Order < ApplicationRecord
 
    enum payment: {
    	銀行振込: 0,
-   	クレジットカード支払い: 1,
+   	クレジットカード: 1,
    }
   
 	enum order_status: {

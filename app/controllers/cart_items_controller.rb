@@ -26,17 +26,28 @@ class CartItemsController < ApplicationController
   def confirm
     # binding.pry
     if params[:ship_address] == "registered_address"
-      @my_addresses = Address.where(customer_id: current_customer.id)
-      @address = @my_addresses.find(params[:ship_nummber].to_i)
+      ad = Address.where(customer_id: current_customer.id).find(params[:ship_nummber].to_i)
+      @postal_code = ad.postal_code
+      @address = ad.address
+      @name = ad.name
     elsif params[:ship_address] == "new_address"
-      @address = Address.new(
+      ad = Address.new(
+          customer_id: current_customer.id,
           address: params[:address],
           postal_code: params[:postal_code],
           name: params[:name]
         )
-      @address.save
-    else
-      @address = params[:ship_address]
+      unless ad.save
+        render action: :info
+      end
+      @postal_code = ad.postal_code
+      @address = ad.address
+      @name = ad.name
+    elsif params[:ship_address] == "customer_address"
+      ad = current_customer
+      @postal_code = ad.postal_code
+      @address = ad.address
+      @name = "#{ad.name_last} #{ad.name_first}"
     end
     @payment = params[:payment]
     @cart_items = current_customer.cart_items
@@ -46,19 +57,22 @@ class CartItemsController < ApplicationController
   def thanks
     cart_items = current_customer.cart_items
     order = Order.new
+    order.customer_id = current_customer.id
+    order.order_status = :入金待ち
     order.shipping = 800
-    order.ship_name = params[:name]
-    order.ship_address = params[:ship_address]
+    order.ship_name = params[:ship_name]
+    order.ship_address = params[:address]
     order.postal_code = params[:postal_code]
     order.payment = params[:payment]
     order.save
-  binding.pry
+  
     cart_items.each do |item|
       order_item = OrderItem.new
       order_item.order_id = order.id
-      order_item.id = item.item.id
+      order_item.item_id = item.item.id
       order_item.amount = item.amount
-      order_item.tax_price = item.item.non_tax_price*1.1
+      order_item.tax_price = (item.item.non_tax_price*1.1).round
+      order_item.production_status = :着手不可
       order_item.save
 
     CartItem.find(item.id).destroy
