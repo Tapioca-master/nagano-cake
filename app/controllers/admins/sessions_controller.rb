@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 class Admins::SessionsController < Devise::SessionsController
+
   def after_sign_in_path_for(resource)
-    admins_top_path
+      if customer_signed_in? == true
+       # Customerでログインしている場合はsign_outさせる
+        destroy_admin_session_path
+      else
+        items_path
+      end
   end
 
   def after_sign_out_path_for(resource)

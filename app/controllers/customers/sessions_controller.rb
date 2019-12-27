@@ -3,7 +3,12 @@
 class Customers::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
-    items_path
+    if admin_signed_in? == true or current_customer.is_active == false
+       # 退会している場合とadminでログインしている場合はsign_outさせる
+        destroy_customer_session_path
+      else
+        admins_top_path
+      end
   end
 
   def after_sign_out_path_for(resource)
