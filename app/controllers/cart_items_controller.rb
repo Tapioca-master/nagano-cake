@@ -75,7 +75,7 @@ class CartItemsController < ApplicationController
       order_item.production_status = :着手不可
       order_item.save
 
-    CartItem.find(item.id).destroy
+    CartItem.find_by(item_id: item.item_id,customer_id: current_customer.id).destroy
     end
 
   end
