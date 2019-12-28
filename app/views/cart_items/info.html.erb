@@ -2,11 +2,11 @@
 	<%= form_tag(cart_items_confirm_path, method: :post)  do %>
 
 <h3><strong>支払方法</strong></h3>
-  	<label><%= radio_button_tag :payment, :クレジットカード %>クレジットカード</label><br>
+  	<label><%= radio_button_tag :payment, :クレジットカード, {:checked => true}  %>クレジットカード</label><br>
   	<label><%= radio_button_tag :payment, :銀行振込 %>銀行振込</label>
 
 <h3><strong>お届け先</strong></h3>
-	<label><%= radio_button_tag :ship_address, :customer_address %>ご自身の住所</label><br>
+	<label><%= radio_button_tag :ship_address, :customer_address, {:checked => true}  %>ご自身の住所</label><br>
 		<%= current_customer.postal_code %><%= current_customer.address %><br>
 		<%= current_customer.name_last %> <%=  current_customer.name_first %><br>
 	
@@ -28,3 +28,40 @@
 	  		</div>
 	<%= submit_tag "確認画面へ" %>
 	<% end %>
+
+<!-- ラジオボタンの選択によりフォームの有効無効を切り替え -->
+<script>
+var checkOption = document.getElementsByName('ship_address');
+var postalElem = document.getElementById("postal_code");
+var addressElem = document.getElementById("address");
+var nameElem = document.getElementById("name");
+var registerdElem = document.getElementById("ship_nummber");
+
+postalElem.disabled = true;
+addressElem.disabled = true;
+nameElem.disabled = true;
+registerdElem.disabled = true;
+    
+    checkOption.forEach(function(e) {
+        e.addEventListener("click", function() {
+					var shipValue = document.querySelector("input:checked[name=ship_address]").value;
+
+					if(shipValue == "customer_address"){
+						postalElem.disabled = true;
+						addressElem.disabled = true;
+						nameElem.disabled = true;
+						registerdElem.disabled = true;
+					}else if(shipValue == "registered_address"){
+						postalElem.disabled = true;
+						addressElem.disabled = true;
+						nameElem.disabled = true;
+						registerdElem.disabled = false;
+					}else if(shipValue == "new_address"){
+						postalElem.disabled = false;
+						addressElem.disabled = false;
+						nameElem.disabled = false;
+						registerdElem.disabled = true;
+					}
+        });
+    });
+</script>
