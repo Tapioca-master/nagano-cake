@@ -4,7 +4,8 @@
 <div class="row">
     <div class="col-md-4">
         <%= form_for [:admins, @item] do |f| %>
-        <%= f.attachment_field :image, fallback: "no_image.jpg", fallback: "no_image.jpg", size:'230x150' %>
+        <%= f.attachment_field :image, fallback: "no_image.jpg", size:'230x150' %>
+        <%= attachment_image_tag @item, :image, :fill, 300, 154, fallback: "no_image.jpg", size:'230x150', format: 'jpeg' %>
     </div>
     <div class="col-md-8">
         <table class="table">
