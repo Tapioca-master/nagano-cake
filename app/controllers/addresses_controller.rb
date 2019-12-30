@@ -1,12 +1,12 @@
 class AddressesController < ApplicationController
+  before_action :authenticate_customer!
+
   def index
-    permission
     @address = Address.new
     @addresses = Address.where(customer_id: current_customer)
   end
 
   def create
-    permission
     @address = Address.new(address_params)
     @address.customer_id = current_customer.id
     @addresses = Address.all
@@ -18,12 +18,10 @@ class AddressesController < ApplicationController
   end
 
   def edit
-    permission
     @address = Address.find(params[:id])
   end
 
   def update
-    permission
     @address = Address.find(params[:id])
     if @address.update(address_params)
       redirect_to addresses_path
@@ -33,16 +31,9 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    permission
     address = Address.find(params[:id])
     if address.destroy
       redirect_to addresses_path
-    end
-  end
-
-  def permission
-    unless current_customer
-      redirect_to new_customer_session_path
     end
   end
 

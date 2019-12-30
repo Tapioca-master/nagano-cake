@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_customer!
+
   def index
   	  @orders = Order.where(customer_id:  current_customer.id)
   	  @order_items = OrderItem.where(order_id: params[:id])
@@ -9,6 +11,5 @@ class OrdersController < ApplicationController
   end
 
   def create
-  	byebug
   end
 end

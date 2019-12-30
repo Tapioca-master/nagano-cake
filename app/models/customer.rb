@@ -21,4 +21,9 @@ def update_without_current_password(params, *options)
     result
 end
 
+# 退会済み会員のログインを受け付けない(aki)
+def find_for_authentication(conditions)
+  super(conditions.merge(is_active: true))
+end
+
 end

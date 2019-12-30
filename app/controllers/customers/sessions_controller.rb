@@ -1,9 +1,24 @@
 # frozen_string_literal: true
 
 class Customers::SessionsController < Devise::SessionsController
+  # adminとの2重signinを防止
+   before_action :is_admin_check
+
+   # adminでログインしている場合adminのTOPへリダイレクト
+   def is_admin_check
+    if current_admin
+      redirect_to admins_top_path
+    end
+   end
 
   def after_sign_in_path_for(resource)
-    items_path
+    # if admin_signed_in? == true
+    #    # 退会している場合とadminでログインしている場合はsign_outさせる
+    #     redirect_to destroy_customer_path
+    #   else
+    #     items_path
+    #   end
+    root_path
   end
 
   def after_sign_out_path_for(resource)
