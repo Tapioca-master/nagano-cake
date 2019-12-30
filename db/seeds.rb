@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# 自動生成数
+customer_n = 200
+item_n = 50
+address_n = 200
+order_n = 500
+order_item_n = 800
 
 Admin.create!(
   [
@@ -375,6 +381,25 @@ Customer.create!(
   ]
 )
 
+# Customer自動生成
+p "Customer#{customer_n}個のデータ生成開始"
+start_time = Time.now
+customer_n.times do |n|
+  Customer.create(
+      email: "autocureate#{n}@test.com",
+      password: "autocreatecustomer",
+      name_last: "苗字(#{n})",
+      name_first: "名前(#{n})",
+      name_last_kana: "ミョウジ(#{n})",
+      name_first_kana: "ナマエ(#{n})",
+      postal_code: "#{rand(100..999)}#{rand(1000..9999)}",
+      address: "Seed県自動生成市#{rand(1..10)}-#{rand(1..10)}",
+      phone_number: "#{rand(100..999)}#{rand(1000..9999)}#{rand(1000..9999)}",
+      is_active: true
+    )
+end
+p "終了 時間-> #{(Time.now - start_time).round(3)}s"
+
 
 Genre.create!(
   [
@@ -609,6 +634,25 @@ Item.create!(
   ]
 )
 
+# Item自動生成
+p "Item#{item_n}個のデータ生成開始"
+start_time = Time.now
+item_n.times do |n|
+  Item.create(
+      name: "商品(生成No.#{n})",
+      genre_id: rand(1..Genre.last.id.to_i),
+      sales_status:
+      if rand(2) == 1
+        :販売中
+      else
+        :売り切れ
+      end,
+      introduction: "おいしい#{n}です。自動生成番号#{n}。サンプルテキスト。サンプルテキスト。サンプルテキスト。サンプルテキスト。サンプルテキスト。サンプルテキスト。サンプルテキスト。サンプルテキスト。サンプルテキスト。",
+      non_tax_price: "#{rand(10..60)}0".to_i
+    )
+end
+p "終了 時間-> #{(Time.now - start_time).round(3)}s"
+
 Address.create!(
   [
     {
@@ -686,6 +730,19 @@ Address.create!(
   ]
 )
 
+# Address自動生成
+p "Address#{address_n}個のデータ生成開始"
+start_time = Time.now
+address_n.times do |n|
+  Address.create(
+      customer_id: rand(1..Customer.last.id),
+      name: "顧客が登録した配送先の名前(No.#{n})",
+      address: "顧客が登録した配送先の住所(No.#{n})",
+      postal_code: "#{rand(100..999)}#{rand(1000..9999)}"
+    )
+end
+p "終了 時間-> #{(Time.now - start_time).round(3)}s"
+
 Order.create!(
   [
     {
@@ -695,7 +752,7 @@ Order.create!(
       ship_name: '梅原義昭',
       ship_address: '沖縄県島尻郡座間味村阿佐2-11',
       postal_code: '9013401',
-      payment: :銀行振込,
+      payment: :銀行振込
     },
     {
       customer_id: 1,
@@ -704,7 +761,7 @@ Order.create!(
       ship_name: '杉山美優',
       ship_address: '鹿児島県南九州市知覧町瀬世4-3',
       postal_code: '8970305',
-      payment: :クレジットカード,
+      payment: :クレジットカード
     },
     {
       customer_id: 2,
@@ -713,7 +770,7 @@ Order.create!(
       ship_name: '橋爪泰賀',
       ship_address: '北海道釧路市阿寒町下仁々志別3-8-18',
       postal_code: '0850204',
-      payment: :クレジットカード,
+      payment: :クレジットカード
     },
     {
       customer_id: 3,
@@ -722,10 +779,26 @@ Order.create!(
       ship_name: '梅田優晴',
       ship_address: '京都府京都市右京区嵯峨中又町4-4プラザ嵯峨中又町312',
       postal_code: '6168347',
-      payment: :銀行振込,
+      payment: :銀行振込
     },
   ]
 )
+
+# Order自動生成
+p "Order#{order_n}個のデータ生成開始"
+start_time = Time.now
+order_n.times do |n|
+  Order.create(
+      customer_id: rand(1..Customer.last.id),
+      order_status: rand(5),
+      shipping: 800,
+      ship_name: 'オーダー自動',
+      ship_address: 'アドレス自動',
+      postal_code: rand(1000000..9999999),
+      payment: rand(2)
+    )
+end
+p "終了 時間-> #{(Time.now - start_time).round(3)}s"
 
 OrderItem.create!(
   [
@@ -773,3 +846,63 @@ OrderItem.create!(
     }
   ]
 )
+
+# OrderItem自動生成
+p "OrderItem#{order_item_n}個のデータ生成開始"
+start_time = Time.now
+order_item_n.times do |n|
+  item = Item.find(1..Item.last.id)
+  order = Order.find(rand(1..Order.last.id))
+
+  OrderItem.create(
+      order_id: order.id,
+      item_id: item.id,
+      production_status:
+      if order.order_status == "入金待ち"
+        :着手不可
+      elsif order.order_status == "入金確認"
+        :製作待ち
+      elsif order.order_status == "製作中"
+        :製作中
+      elsif order.order_status == "発送準備中"
+        :製作完了
+      elsif order.order_status == "発送済み"
+        :製作完了
+      end,
+      amount: rand(1..10),
+      tax_price: (item.non_tax_price * 1.1).round
+    )
+  end
+# ---商品数が0のオーダーを探索し、商品を補完---
+  order_all = Order.all
+  # 各オーダーに対してOrderItemの有無をチェックし、無ければそのオーダーをOrderItemのOrder_idとして扱う
+  order_all.each do |o|
+    if OrderItem.find_by(order_id: o.id) == nil
+      p "!!!Find nonitem's order!!!  Order.id: #{o.id}"
+      order = Order.find(o.id)
+      item = Item.find(1..Item.last.id)
+
+      OrderItem.create(
+      order_id: order.id,
+      item_id: item.id,
+      production_status:
+      if order.order_status == "入金待ち"
+        :着手不可
+      elsif order.order_status == "入金確認"
+        :製作待ち
+      elsif order.order_status == "製作中"
+        :製作中
+      elsif order.order_status == "発送準備中"
+        :製作完了
+      elsif order.order_status == "発送済み"
+        :製作完了
+      end,
+      amount: rand(1..10),
+      tax_price: (item.non_tax_price * 1.1).round
+    )
+    else
+      p "This order has items.  Order.id:#{o.id}"
+    end
+  end
+# -----------------------------------------------
+p "終了 時間-> #{(Time.now - start_time).round(3)}s"
