@@ -1,8 +1,7 @@
 class OrderItemsController < ApplicationController
-	before_action :authenticate_customer!
+	before_action :authenticate_admin!
 
 	def update
-
 		order_item = OrderItem.find(params[:id])
 
 		if order_item.update(order_item_params)
@@ -16,6 +15,7 @@ class OrderItemsController < ApplicationController
 			if order_items.where(production_status: :製作完了).count == order_items.count
 				order.update(order_status: :発送準備中)
 			end
+			p "Order id: #{order.id}へリダイレクト"
 			redirect_to admins_order_path(order)
 		else
 			# render先に必要な情報を取得(aki)
@@ -23,7 +23,6 @@ class OrderItemsController < ApplicationController
 			@order_items = OrderItem.where(order_id: @order.id)
 			render admins_orders_path
 		end
-
 	end
 
 	private
