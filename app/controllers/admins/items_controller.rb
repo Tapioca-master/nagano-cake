@@ -5,11 +5,13 @@ class Admins::ItemsController < ApplicationController
   PER = 10
 
   def index
+    # 検索パラメータの有無で条件分岐
     if params[:search] != nil
       items = Item.search(params[:search])
     else
       items = Item.all
     end
+    # kaminari用
     @items = items.page(params[:page]).per(PER)
   end
 

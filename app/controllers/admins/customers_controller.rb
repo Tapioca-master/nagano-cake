@@ -1,7 +1,7 @@
 class Admins::CustomersController < ApplicationController
   before_action :authenticate_admin!
 
-  # kaminari表示数設定(aki)
+  # kaminari表示数設定
   PER = 10
 
   def index
@@ -9,11 +9,14 @@ class Admins::CustomersController < ApplicationController
     if params[:search] != nil
       customers = Customer.search(params[:search])
       if customers == nil
+        # 検索にヒットしなかった場合は空のオブジェクトを渡す
         customers = Cutsomer.new
       end
     else
+      # 検索パラメータがない場合（通常）は全ての顧客を渡す
       customers = Customer.all
     end
+    # kaminari用
     @customers = customers.page(params[:page]).per(PER)
   end
 
