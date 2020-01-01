@@ -8,18 +8,12 @@ class Admins::SessionsController < Devise::SessionsController
    # customerでログインしている場合customerのTOPへリダイレクト
    def is_customer_check
     if current_customer
+      flash[:danger] = "顧客ユーザからサインアウトしてください"
       redirect_to root_path
     end
    end
 
   def after_sign_in_path_for(resource)
-      # if customer_signed_in? == true
-      #  # Customerでログインしている場合はsign_outさせる
-      # # destroy_admin_session_path
-      # redirect_to destory_admin_path
-      # else
-      #   admins_top_path
-      # end
       admins_top_path
   end
 

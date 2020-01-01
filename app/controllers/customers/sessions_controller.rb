@@ -7,17 +7,12 @@ class Customers::SessionsController < Devise::SessionsController
    # adminでログインしている場合adminのTOPへリダイレクト
    def is_admin_check
     if current_admin
+      flash[:danger] = "管理者ユーザからサインアウトしてください"
       redirect_to admins_top_path
     end
    end
 
   def after_sign_in_path_for(resource)
-    # if admin_signed_in? == true
-    #    # 退会している場合とadminでログインしている場合はsign_outさせる
-    #     redirect_to destroy_customer_path
-    #   else
-    #     items_path
-    #   end
     root_path
   end
 

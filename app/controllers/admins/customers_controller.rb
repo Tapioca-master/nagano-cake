@@ -8,14 +8,13 @@ class Admins::CustomersController < ApplicationController
     # 検索パラメータの有無による分岐
     if params[:search] != nil
       customers = Customer.search(params[:search])
-      if customers == nil
-        # 検索にヒットしなかった場合は空のオブジェクトを渡す
-        customers = Cutsomer.new
-      end
+      flash.now[:notice] = "検索の結果 #{customers.count} 件みつかりました"
     else
       # 検索パラメータがない場合（通常）は全ての顧客を渡す
       customers = Customer.all
+      flash.now[:notice] = "全 #{customers.count} 件あります"
     end
+
     # kaminari用
     @customers = customers.page(params[:page]).per(PER)
   end
@@ -34,8 +33,10 @@ class Admins::CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
+      flash[:success] = "顧客情報を更新しました"
       redirect_to admins_customer_path(@customer)
     else
+      flash[:danger] = "顧客情報の更新に失敗しました"
       render action: :edit
     end
   end

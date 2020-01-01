@@ -18,7 +18,6 @@ class ItemsController < ApplicationController
 
   	@items = Item.where(genre_id: params[:id]).page(params[:page]).per(PER)
     @items_count = Item.where(genre_id: params[:id]).count
-
   end
 
   def show
