@@ -14,4 +14,13 @@ class Item < ApplicationRecord
 		売り切れ: 1
 	}
 
+	# admin側検索機能
+	def self.search(search)
+		if search
+			Item.where(['name LIKE ?', "%#{search}%"])
+		else
+			Item.all
+		end
+	end
+
 end

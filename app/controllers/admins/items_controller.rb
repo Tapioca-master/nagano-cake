@@ -1,8 +1,16 @@
 class Admins::ItemsController < ApplicationController
   before_action :authenticate_admin!
 
+  # kaminari表示数設定
+  PER = 10
+
   def index
-    @items = Item.page(params[:page])
+    if params[:search] != nil
+      items = Item.search(params[:search])
+    else
+      items = Item.all
+    end
+    @items = items.page(params[:page]).per(PER)
   end
 
   def new

@@ -27,6 +27,11 @@
                 <div class="collapse navbar-collapse" id="navbarEexample1">
                     <div class="navbar-right">
                         <ul class="nav navbar-nav">
+                                <% if flash[:notice] %>
+                                <li>
+                                    <p><%= flash[:notice] %></p>
+                                </li>
+                                <% end %>
                             <!-- Customerがログインしている時 -->
                             <% if current_customer %>
                             <li class="">
@@ -45,7 +50,23 @@
                                 <%= link_to "About", items_about_path %>
                             </li>
                             <!-- Adminがログインしている時 -->
+                            <!-- Item検索機能ここから -->
+                            <li>
                             <% elsif current_admin %>
+                            <%= form_tag(admins_items_path,:method => 'get') do %>
+                            <%= text_field_tag :search %>
+                            <%= submit_tag "商品検索", :name => nil %>
+                            <% end %>
+                            </ll>
+                            <!-- Item検索機能ここまで -->
+                            <!-- Customer検索機能ここから -->
+                            <li>
+                            <%= form_tag(admins_customers_path,:method => 'get') do %>
+                            <%= text_field_tag :search %>
+                            <%= submit_tag "顧客検索", :name => nil %>
+                            <% end %>
+                            </li>
+                            <!-- Customer検索機能ここまで -->
                             <li class="">
                                 <%= link_to "#{current_admin.name}さん" %>
                             </li>

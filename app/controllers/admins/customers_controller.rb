@@ -5,7 +5,16 @@ class Admins::CustomersController < ApplicationController
   PER = 10
 
   def index
-    @customers = Customer.all.page(params[:page]).per(PER)
+    # 検索パラメータの有無による分岐
+    if params[:search] != nil
+      customers = Customer.search(params[:search])
+      if customers == nil
+        customers = Cutsomer.new
+      end
+    else
+      customers = Customer.all
+    end
+    @customers = customers.page(params[:page]).per(PER)
   end
 
   def show

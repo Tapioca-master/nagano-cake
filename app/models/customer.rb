@@ -26,4 +26,13 @@ def find_for_authentication(conditions)
   super(conditions.merge(is_active: true))
 end
 
+# admin側検索機能
+  def self.search(search)
+    if search
+      Customer.where("name_last IN (?) OR name_first IN (?) OR name_last_kana IN (?) OR name_first_kana IN (?) OR (name_last || name_first) IN (?) OR (name_last_kana || name_first_kana) IN (?)" , search, search, search, search, search, search)
+    else
+      Customer.all
+    end
+  end
+
 end
