@@ -102,7 +102,7 @@ class CartItemsController < ApplicationController
   def destroy
     @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
-    flash[:success] = "#{@cart_item.item.name}を削除しました"
+    flash[:success] = "カートから #{@cart_item.item.name} を削除しました"
     redirect_to cart_items_path
   end
 
