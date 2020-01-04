@@ -2,9 +2,18 @@ class Order < ApplicationRecord
 	has_many :order_items, dependent: :destroy
 	belongs_to :customer
 
+	validates :customer_id, presence: true
+	validates :order_status, presence: true
+	validates :shipping, presence: true
+	validates :ship_name, presence: true
+	validates :ship_address, presence: true
+	validates :postal_code, presence: true
+	validates :payment, presence: true
+
+
    enum payment: {
    	銀行振込: 0,
-   	クレジットカード支払い: 1,
+   	クレジットカード: 1,
    }
   
 	enum order_status: {

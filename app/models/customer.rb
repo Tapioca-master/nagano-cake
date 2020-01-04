@@ -8,6 +8,17 @@ class Customer < ApplicationRecord
          has_many :addresses, dependent: :destroy
          has_many :cart_items, dependent: :destroy
 
+         validates :email, presence: true
+         validates :name_first, presence: true
+         validates :name_last, presence: true
+         validates :name_first_kana, presence: true
+         validates :name_last_kana, presence: true
+         validates :postal_code, presence: true
+         validates :address, presence: true
+         validates :phone_number, presence: true
+         validates :is_active, presence: true
+
+
 def update_without_current_password(params, *options)
     params.delete(:current_password)
 
@@ -20,5 +31,20 @@ def update_without_current_password(params, *options)
     clean_up_passwords
     result
 end
+
+# 退会済み会員のログインを受け付けない(aki)
+def active_for_authentication?
+  super && is_active
+end
+
+# admin側customer検索機能
+  def self.search(search)
+    if search
+      # 苗字or名前or各かなor(苗字+名前)で検索
+      Customer.where("name_last IN (?) OR name_first IN (?) OR name_last_kana IN (?) OR name_first_kana IN (?) OR (name_last || name_first) IN (?) OR (name_last_kana || name_first_kana) IN (?)" , search, search, search, search, search, search)
+    else
+      Customer.all
+    end
+  end
 
 end

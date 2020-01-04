@@ -3,7 +3,7 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <%= attachment_image_tag @item, :image, :fill, 230, 150, format: 'jpeg', fallback: "no_image.jpg", size:'230x150' %>
+        <%= attachment_image_tag @item, :image, :fill, 300, 300, format: 'jpeg', fallback: "no_image.jpg", size:'300x300', :style=>"max-width: 300px; height: auto;" %>
     </div>
     <div class="col-md-8">
         <table class="table table-striped table-bordered table-hover">
@@ -28,7 +28,7 @@
             <tr>
                 <th>税込価格（税抜価格）</th>
                 <td>
-                    <%= "#{(@item.non_tax_price * 1.1).round}（#{@item.non_tax_price.round}）円" %>
+                    <%= "#{(@item.non_tax_price * 1.1).round.to_s(:delimited)}（#{@item.non_tax_price.round.to_s(:delimited)}）円" %>
                 </td>
             </tr>
             <tr>

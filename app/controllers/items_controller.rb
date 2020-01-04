@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_customer!, only: [:show]
+
+
 	# TOPページkaminari表示数設定(aki)
 	PER = 8
 
@@ -14,7 +17,7 @@ class ItemsController < ApplicationController
   	end
 
   	@items = Item.where(genre_id: params[:id]).page(params[:page]).per(PER)
-
+    @items_count = Item.where(genre_id: params[:id]).count
   end
 
   def show

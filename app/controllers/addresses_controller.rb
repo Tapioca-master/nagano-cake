@@ -1,48 +1,45 @@
 class AddressesController < ApplicationController
+  before_action :authenticate_customer!
+
   def index
-    permission
     @address = Address.new
     @addresses = Address.where(customer_id: current_customer)
+    flash.now[:notice] = "全 #{@addresses.count} 件あります"
   end
 
   def create
-    permission
     @address = Address.new(address_params)
     @address.customer_id = current_customer.id
     @addresses = Address.all
     if @address.save
+      flash[:success] = "新しい配送先を登録しました"
       redirect_to addresses_path
     else
+      flash[:danger] = "新しい配送先を登録できませんでした"
       render action: :index
     end
   end
 
   def edit
-    permission
     @address = Address.find(params[:id])
   end
 
   def update
-    permission
     @address = Address.find(params[:id])
     if @address.update(address_params)
+      flash[:success] = "配送先を更新しました"
       redirect_to addresses_path
     else
+      flash[:danger] = "配送先を更新できませんでした"
       render action: :edit
     end
   end
 
   def destroy
-    permission
     address = Address.find(params[:id])
     if address.destroy
+      flash[:success] = "配送先を削除しました"
       redirect_to addresses_path
-    end
-  end
-
-  def permission
-    unless current_customer
-      redirect_to new_customer_session_path
     end
   end
 

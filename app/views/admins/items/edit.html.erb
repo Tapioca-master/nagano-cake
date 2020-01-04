@@ -2,37 +2,37 @@
     <h1>商品編集画面</h1>
 </div>
 <div class="row">
+<%= form_for @item, url: admins_item_path, html: {method: 'PATCH'} do |f| %>
     <div class="col-md-4">
-        <%= form_for [:admins, @item] do |f| %>
-        <%= attachment_image_tag @item, :image, fallback: "no_image.jpg", fallback: "no_image.jpg", size:'230x150'%>
+        <%= attachment_image_tag @item, :image, :fill, 300, 300, fallback: "no_image.jpg", size:'300x300', format: 'jpeg', :style=>"max-width: 300px; height: auto;" %>
         <%= f.attachment_field :image %>
     </div>
     <div class="col-md-8">
         <table class="table table-striped table-bordered table-hover">
             <tr>
                 <td><label>商品名</label></td>
-                 <td><%= f.text_field :name %></td>
-            </tr>
-            <div>
-                 <td><label>商品説明</label></td>
-                 <td><%= f.text_area :introduction %></td>
+                <td><%= f.text_field :name %></td>
             </tr>
             <tr>
-                 <td><label>ジャンル</label></td>
-                 <td><%= f.select :genre_id, Genre.all.collect{|g| [g.name, g.id]}, {prompt: '選択してください'}  %></td>
+                <td><label>商品説明</label></td>
+                <td><%= f.text_area :introduction %></td>
             </tr>
             <tr>
-                 <td><label>税抜価格</label></td>
-                 <td><%= f.text_field :non_tax_price %>円</td>
+                <td><label>ジャンル</label></td>
+                <td><%= f.select :genre_id, Genre.all.collect{|g| [g.name, g.id]} %></td>
             </tr>
             <tr>
-                 <td><label>販売<br>ステータス</label></td>
-                 <td><%= f.select :sales_status, Item.sales_statuses.keys, {prompt: '選択してください'} %></td>
+                <td><label>税抜価格</label></td>
+                <td><%= f.text_field :non_tax_price %>円</td>
+            </tr>
+            <tr>
+                <td><label>販売<br>ステータス</label></td>
+                <td><%= f.select :sales_status, Item.sales_statuses.keys %></td>
             </tr>
         </table>
     </div>
     <div>
-        <%= f.submit "変更を保存", class: "btn btn-primary	" %>
+        <%= f.submit "変更を保存", class: "btn btn-primary" %>
     </div>
     <% end %>
 </div>

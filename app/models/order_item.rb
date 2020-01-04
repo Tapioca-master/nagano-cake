@@ -1,7 +1,7 @@
 class OrderItem < ApplicationRecord
 	belongs_to :order, dependent: :destroy
 	belongs_to :item
-
+	
 	enum production_status: {
 		着手不可: 0,
 		製作待ち: 1,

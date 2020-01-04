@@ -31,6 +31,7 @@
                         <li class="">
                             <%= link_to items_path, method: :get do %>
                             <i class="fas fa-home"></i>
+
                             <% end %>
                         </li>
                         <li class="">
@@ -46,6 +47,23 @@
                         </li>
                         <!-- Adminがログインしている時 -->
                         <% elsif current_admin %>
+                      <!-- Item検索機能ここから -->
+                            <li>
+                                <% elsif current_admin %>
+                                <%= form_tag(admins_items_path,:method => 'get') do %>
+                                <%= text_field_tag :search %>
+                                <%= submit_tag "商品検索", :name => nil %>
+                                <% end %>
+                                </ll>
+                                <!-- Item検索機能ここまで -->
+                                <!-- Customer検索機能ここから -->
+                            <li>
+                                <%= form_tag(admins_customers_path,:method => 'get') do %>
+                                <%= text_field_tag :search %>
+                                <%= submit_tag "顧客検索", :name => nil %>
+                                <% end %>
+                            </li>
+                            <!-- Customer検索機能ここまで -->
                         <li class="">
                             <%= link_to "#{current_admin.name}さん" %>
                         </li>
@@ -87,11 +105,42 @@
     <div class="wrapper"style="min-height: 100vh;position: relative;padding-bottom: 200px;box-sizing: border-box;";>
         <div class="container">
             <div class="row">
+              
+              <!-- flash表示ここから -->
+    <div class="row　flash text-center">
+        <% if flash[:notice] %>
+        <p class="text-primary">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            <%= flash[:notice] %>
+        </p>
+        <% end %>
+        <% if flash[:success] %>
+        <p class="text-success">
+            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+            <%= flash[:success] %>
+        </p>
+        <% end %>
+        <% if flash[:danger] %>
+        <p class="text-danger">
+            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+            <%= flash[:danger] %>
+        </p>
+        <% end %>
+    </div>
+    <!-- flash表示ここまで -->
                 
                 <%= yield %>
             </div>
         </div>
         <footer class="page-footer font-lage pt-4"style="position: absolute;bottom: 0;width: 100%;background-size: cover;height: 200px; background-position: 0px 400px ;background-image: url(/assets/background-image1.jpg)">
+    <div class="container">
+        <div class="row">
+            <%= yield %>
+        </div>
+        <footer class="page-footer font-small pt-4">
+            <!-- Footer Elements -->
+            <div class="container">
+                <!-- Social buttons -->
                 <ul class="list-unstyled list-inline text-center">
                     <li class="list-inline-item">
                         <a class="btn-floating btn-fb mx-1">
