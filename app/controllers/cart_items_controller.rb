@@ -100,6 +100,17 @@ class CartItemsController < ApplicationController
   end
 
   def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+    flash[:success] = "#{@cart_item.item.name}を削除しました"
+    redirect_to cart_items_path
+  end
+
+  def empty
+    @cart_item = CartItem.where(customer_id: current_customer)
+    @cart_item.delete_all
+    flash[:success] = "カートを空にしました"
+    redirect_to items_path
   end
 
   private
