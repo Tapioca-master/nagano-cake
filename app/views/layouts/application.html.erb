@@ -9,44 +9,45 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/46860f55f1.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
-    <header class="navbar navbar-default">
-        <nav class="navbar">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <div class="navbar-brand">
-                        <%= link_to "NaganoCake", items_path %>
-                    </div>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarEexample1">
-                    <div class="navbar-right">
-                        <ul class="nav navbar-nav">
-                            <!-- Customerがログインしている時 -->
-                            <% if current_customer %>
-                            <li class="">
-                                <%= link_to "Home", items_path %>
-                            </li>
-                            <li class="">
-                                <%= link_to "#{current_customer.name_last}　#{current_customer.name_first}さん", customer_path(current_customer) %>
-                            </li>
-                            <li class="">
-                                <%= link_to "Cart", cart_items_path %>
-                            </li>
-                            <li class="">
-                                <%= link_to "Logout", destroy_customer_session_path, method: :delete %>
-                            </li>
-                            <li class="">
-                                <%= link_to "About", items_about_path %>
-                            </li>
-                            <!-- Adminがログインしている時 -->
-                            <!-- Item検索機能ここから -->
+    <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #ffeaff;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarEexample1">
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav"style="color: black;">
+                        <!-- Customerがログインしている時 -->
+                        <% if current_customer %>
+                        <li class="">
+                            <%= link_to "#{current_customer.name_last}　#{current_customer.name_first}さん", customer_path(current_customer) %>
+                        </li>
+                        <li class="">
+                            <%= link_to items_path, method: :get do %>
+                            <i class="fas fa-home"></i>
+
+                            <% end %>
+                        </li>
+                        <li class="">
+                            <%= link_to cart_items_path method: :get do%>
+                            <i class="fas fa-shopping-cart"></i>
+                            <% end %>
+                        </li>
+                        <li class="">
+                            <%= link_to "Logout", destroy_customer_session_path, method: :delete %>
+                        </li>
+                        <li class="">
+                            <%= link_to "About", items_about_path %>
+                        </li>
+                        <!-- Adminがログインしている時 -->
+                        <% elsif current_admin %>
+                      <!-- Item検索機能ここから -->
                             <li>
                                 <% elsif current_admin %>
                                 <%= form_tag(admins_items_path,:method => 'get') do %>
@@ -63,45 +64,49 @@
                                 <% end %>
                             </li>
                             <!-- Customer検索機能ここまで -->
-                            <li class="">
-                                <%= link_to "#{current_admin.name}さん" %>
-                            </li>
-                            <li class="">
-                                <%= link_to "Genres", admins_genres_path %>
-                            </li>
-                            <li class="">
-                                <%= link_to "Customers", admins_customers_path %>
-                            </li>
-                            <li class="">
-                                <%= link_to "Orders", admins_orders_path %>
-                            </li>
-                            <li class="">
-                                <%= link_to "Items", admins_items_path %>
-                            </li>
-                            <li class="">
-                                <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
-                            </li>
-                            <!-- いずれもログインしていない時 -->
-                            <% else %>
-                            <li class="">
-                                <%= link_to "Login", new_customer_session_path %>
-                            </li>
-                            <li class="">
-                                <%= link_to "Signup", new_customer_registration_path %>
-                            </li>
-                            <li class="">
-                                <%= link_to "About", items_about_path %>
-                            </li>
-                            <% end %>
-                        </ul>
-                    </div>
+                        <li class="">
+                            <%= link_to "#{current_admin.name}さん" %>
+                        </li>
+                        <li class="">
+                            <%= link_to "Genres", admins_genres_path %>
+                        </li>
+                        <li class="">
+                            <%= link_to "Customers", admins_customers_path %>
+                        </li>
+                        <li class="">
+                            <%= link_to "Orders", admins_orders_path %>
+                        </li>
+                        <li class="">
+                            <%= link_to "Items", admins_items_path %>
+                        </li>
+                        <li class="">
+                            <%= link_to "logout", destroy_admin_session_path, method: :delete %>
+                        </li>
+                        <!-- いずれもログインしていない時 -->
+                        <% else %>
+                        <li class="">
+                            <%= link_to "Login", new_customer_session_path %>
+                        </li>
+                        <li class="">
+                            <%= link_to "Signup", new_customer_registration_path %>
+                        </li>
+                        <li class="">
+                            <%= link_to "About", items_about_path %>
+                        </li>
+                        <% end %>
+                    </ul>
                 </div>
             </div>
-            </div>
-        </nav>
         </div>
+    </nav>
+    <header style="background-size: cover;background-position: 0px 950px ;background-image: url(/assets/background-image1.jpg)">
+         <%= link_to image_tag("/assets/logo-s.png",width: '200'), items_path %>
     </header>
-    <!-- flash表示ここから -->
+    <div class="wrapper"style="min-height: 100vh;position: relative;padding-bottom: 200px;box-sizing: border-box;";>
+        <div class="container">
+            <div class="row">
+              
+              <!-- flash表示ここから -->
     <div class="row　flash text-center">
         <% if flash[:notice] %>
         <p class="text-primary">
@@ -123,6 +128,11 @@
         <% end %>
     </div>
     <!-- flash表示ここまで -->
+                
+                <%= yield %>
+            </div>
+        </div>
+        <footer class="page-footer font-lage pt-4"style="position: absolute;bottom: 0;width: 100%;background-size: cover;height: 200px; background-position: 0px 400px ;background-image: url(/assets/background-image1.jpg)">
     <div class="container">
         <div class="row">
             <%= yield %>
@@ -148,18 +158,18 @@
                         </a>
                     </li>
                 </ul>
-                <!-- Social buttons -->
+            <div class="row" style="text-align: center;">
+                <h5>営業時間</h5>
+                <p>時間 / 11:00～17:00(月～金)<br>
+                休業日 / 土曜日 日曜日 ・祝日<br>
+                住所：〒999-9999　○○県○○市○○町○○　99-99<br>
+                TEL：99-9999-9999<br>
+                MAIL：sample@shop.rakuten.co.jp<br></p>
             </div>
-            <!-- Footer Elements -->
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
                 <a href=""> NaganoCake</a>
             </div>
-            <!-- Copyright -->
         </footer>
-        <!-- Footer -->
-    </div>
     </div>
 </body>
-
 </html>
