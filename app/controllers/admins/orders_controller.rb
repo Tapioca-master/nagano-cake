@@ -1,24 +1,27 @@
 class Admins::OrdersController < ApplicationController
 	before_action :authenticate_admin!
 
+	# kaminari表示数設定
+ 	 PER = 10
+
 	def index
 		# TOPページからのリンク(aki)
 		if params[:key] == "today"
-			@orders = Order.where(created_at: Time.zone.now.all_day)
-			@order_items = OrderItem.where(created_at: Time.zone.now.all_day)
-			flash.now[:notice] = "本日分（#{@orders.count}件）を表示しています"
+			orders = Order.where(created_at: Time.zone.now.all_day)
+			flash.now[:notice] = "本日の注文（#{orders.count}件）を表示しています"
 		# 一意のCustomerからのリンク(aki)
 		elsif params[:key] =~ /^[0-9]+$/
-			@orders = Order.where(customer_id: params[:key])
-			@order_items = OrderItem.all
+			orders = Order.where(customer_id: params[:key])
 			customer = Customer.find(params[:key])
-			flash.now[:notice] = "#{customer.name_last}#{customer.name_first} 様からの注文（#{@orders.count}件）を表示しています"
+			flash.now[:notice] = "#{customer.name_last}#{customer.name_first} 様からの注文（#{orders.count}件）を表示しています"
 		# その他（ヘッダ等）からのリンク(aki)
 		else
-			@orders = Order.all
-			@order_items = OrderItem.all
-			flash.now[:notice] = "全注文（#{@orders.count}件）を表示しています"
+			orders = Order.all
+			flash.now[:notice] = "全注文（#{orders.count}件）を表示しています"
 		end
+		@order_items = OrderItem.all
+		# kaminari用
+    	@orders = orders.page(params[:page]).per(PER)
 	end
 
 	def today
