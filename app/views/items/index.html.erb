@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="padding-top: 30px">
     <div class="row">
         <div class="col-md-2">
             <p>ジャンル検索</p>
@@ -13,7 +13,7 @@
         <div class="col-md-10">
             <p>
                 <%= @items.first.genre.name %>
-                <%= "（全#{@items.length}件）" %>
+                <%= "（全#{@items_count}件）" %>
             </p>
             <div>
                 <% @items.each do |item| %>

@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>配送先登録/一覧</h1>
+            <h3>配送先登録/一覧</h3>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <%= form_for(@address) do |f| %>
-            <table class="table">
+            <table class="table table-striped table-bordered table-hover">
                 <tr>
                     <td>郵便番号(ハイフンあり7桁)</td>
                     <td>
@@ -27,14 +27,14 @@
                     </td>
                 </tr>
             </table>
-            <%= f.submit "登録する", class: "btn btn-primary" %>
+            <%= f.submit "登録する", class: "btn-sm btn-primary" %>
             <% end %>
         </div>
     </div>
     <br>
     <div class="row">
         <div class="col-md-12">
-            <table class="table">
+            <table class="table table-striped table-bordered table-hover">
                 <tr>
                     <th>郵便番号</th>
                     <th>住所</th>
@@ -53,8 +53,8 @@
                         <%= address.name %>
                     </td>
                     <td>
-                        <%= link_to "編集する", edit_address_path(address), class: "btn btn-primary"%>
-                        <%= link_to "削除する", address_path(address), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+                        <%= link_to "編集する", edit_address_path(address), class: "btn-sm btn-primary"%>
+                        <%= link_to "削除する", address_path(address), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn-sm btn-danger" %>
                     </td>
                 </tr>
                 <% end %>
