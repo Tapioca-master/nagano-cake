@@ -857,8 +857,14 @@ OrderItem.create!(
 p "OrderItem#{order_item_n}個のデータ生成開始"
 start_time = Time.now
 order_item_n.times do |n|
-  item = Item.find(1..Item.last.id)
+  item = Item.find(rand(1..Item.last.id))
   order = Order.find(rand(1..Order.last.id))
+
+  # 1つのオーダー内に同じ商品が登録されるのを防ぐ
+  while OrderItem.where(order_id: order.id).find_by(item_id: item.id) != nil
+    order = Order.find(rand(1..Order.last.id))
+  end
+
   OrderItem.create(
       order_id: order.id,
       item_id: item.id,
