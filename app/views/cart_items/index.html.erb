@@ -16,9 +16,10 @@
 						<%= cart_item.item.name %></td>
 					<td><%= "¥#{(cart_item.item.non_tax_price* 1.1).round}（税込）"  %></td>
 					<td><%= form_for cart_item do |f| %>
-						<%= f.text_field :amount %>
-						<%= f.submit "変更", class: 'btn-sm btn-primary' %>
-						<% end %></td>
+                        <%= f.select :amount, [["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10]] %>
+						<%= f.submit "変更", class: 'btn btn-primary' %>
+						<% end %>
+					</td>
 					<td><%= "¥#{(cart_item.item.non_tax_price*cart_item.amount* 1.1).round}（税込）"  %></td>
 					<td><%= button_to '削除する', cart_item_path(cart_item), method: :delete, data: {confirm: '商品を削除しますか？'}, class: 'btn-sm btn-danger center-block'%></td>
 
@@ -34,11 +35,16 @@
 	  </div>
 	  <div class= "col-sm-5">
 	  </div>
-	  <div class= "col-sm-3">
-		  <h4> 合計金額<%= "¥#{total.to_s(:delimited)}" %>円</h4>
+	  <div class= "col-sm-1 kingaku">
+	  	合計金額
+	  </div>
+	  <div class= "col-sm-1 suzi">
+		  <%= "¥#{total.to_s(:delimited)}" %>
 	  </div>
     </div>
+
       <div class= text-right>
+      	<% if current_customer.cart_items != [] %>
       	<%= link_to "情報入力に進む", cart_items_info_path, class: 'btn-sm btn-primary' %><br>
       	<br>
       	<% end %>
