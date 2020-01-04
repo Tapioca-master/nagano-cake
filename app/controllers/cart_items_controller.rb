@@ -55,8 +55,10 @@ class CartItemsController < ApplicationController
         name: params[:name]
         )
       unless ad.save
+        flash.now[:danger] = "新しいお届け先を正しく入力してください"
         render action: :info
       end
+      flash.now[:success] = "新しいお届け先を登録しました"
       @postal_code = ad.postal_code
       @address = ad.address
       @name = ad.name
