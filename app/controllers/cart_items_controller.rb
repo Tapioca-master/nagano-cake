@@ -11,12 +11,15 @@ class CartItemsController < ApplicationController
       cart_item  = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id].to_i)
       cart_item.amount += params[:cart_item][:amount].to_i
       cart_item.save
+      flash[:success] = "カートに #{cart_item.item.name} を #{cart_item.amount} 個追加しました"
       redirect_to cart_items_path
     else
       @cart_item = CartItem.new(cart_item_params)
       if @cart_item.save
+        flash[:success] = "カートに #{@cart_item.item.name} を #{@cart_item.amount} 個追加しました"
         redirect_to cart_items_path
       else
+        flash[:danger] = "カートに #{@cart_item.item.name} を追加できませんでした"
         render item_path (@cart_item.item_id)
       end
     end
@@ -34,10 +37,10 @@ class CartItemsController < ApplicationController
       @name = ad.name
     elsif params[:ship_address] == "new_address"
       ad = Address.new(
-          customer_id: current_customer.id,
-          address: params[:address],
-          postal_code: params[:postal_code],
-          name: params[:name]
+        customer_id: current_customer.id,
+        address: params[:address],
+        postal_code: params[:postal_code],
+        name: params[:name]
         )
       unless ad.save
         render action: :info
@@ -54,7 +57,7 @@ class CartItemsController < ApplicationController
     @payment = params[:payment]
     @cart_items = current_customer.cart_items
     @tax = 1.1
-    end
+  end
 
   def thanks
     cart_items = current_customer.cart_items
@@ -67,7 +70,9 @@ class CartItemsController < ApplicationController
     order.postal_code = params[:postal_code]
     order.payment = params[:payment]
     order.save
-  
+
+    flash.now[:success] = "注文が確定しました"
+
     cart_items.each do |item|
       order_item = OrderItem.new
       order_item.order_id = order.id
@@ -77,7 +82,7 @@ class CartItemsController < ApplicationController
       order_item.production_status = :着手不可
       order_item.save
 
-    CartItem.find_by(item_id: item.item_id,customer_id: current_customer.id).destroy
+      CartItem.find_by(item_id: item.item_id,customer_id: current_customer.id).destroy
     end
 
   end
@@ -85,7 +90,7 @@ class CartItemsController < ApplicationController
   def destroy
   end
 
- private
+  private
 
   def cart_exist?(item_id)
     cart = CartItem.find_by(customer_id: current_customer.id, item_id: item_id)

@@ -1,8 +1,20 @@
 class Admins::ItemsController < ApplicationController
   before_action :authenticate_admin!
 
+  # kaminari表示数設定
+  PER = 10
+
   def index
-    @items = Item.page(params[:page])
+    # 検索パラメータの有無で条件分岐
+    if params[:search] != nil
+      items = Item.search(params[:search])
+      flash.now[:notice] = "検索の結果 #{items.count} 件みつかりました"
+    else
+      items = Item.all
+      flash.now[:notice] = "全 #{items.count} 件あります"
+    end
+    # kaminari用
+    @items = items.page(params[:page]).per(PER)
   end
 
   def new
@@ -13,9 +25,11 @@ class Admins::ItemsController < ApplicationController
     @item = Item.new(item_params)
     #binding.pry
     if @item.save
-    redirect_to admins_item_path(@item)
+      flash[:success] = "商品 #{@item.name} を新規登録しました"
+      redirect_to admins_item_path(@item)
     else
-    render action: :new
+      flash[:danger] = "商品を新規登録できませんでした"
+      render action: :new
     end
   end
 
@@ -30,8 +44,10 @@ class Admins::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
+      flash[:success] = "商品 #{@item.name} を更新しました"
       redirect_to admins_item_path(@item)
     else
+      flash[:danger] = "商品を更新できませんでした"
       render action: :edit
     end
   end

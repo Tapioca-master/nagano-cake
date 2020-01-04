@@ -7,11 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 自動生成数
-customer_n = 200
-item_n = 50
-address_n = 200
-order_n = 500
-order_item_n = 800
+# customer_n = 200
+# item_n = 50
+# address_n = 200
+# order_n = 500
+# order_item_n = 800
+
+customer_n = 10
+item_n = 10
+address_n = 20
+order_n = 30
+order_item_n = 100
 
 Admin.create!(
   [
@@ -805,21 +811,21 @@ OrderItem.create!(
     {
       order_id: 1,
       item_id: 1,
-      production_status: :製作待ち,
+      production_status: :着手不可,
       amount: 1,
       tax_price: (Item.find(1).non_tax_price * 1.1).round
     },
     {
       order_id: 1,
       item_id: 2,
-      production_status: :製作待ち,
+      production_status: :着手不可,
       amount: 1,
       tax_price: (Item.find(2).non_tax_price * 1.1).round
     },
     {
       order_id: 1,
       item_id: 3,
-      production_status: :製作待ち,
+      production_status: :着手不可,
       amount: 1,
       tax_price: (Item.find(3).non_tax_price * 1.1).round
     },
@@ -853,21 +859,20 @@ start_time = Time.now
 order_item_n.times do |n|
   item = Item.find(1..Item.last.id)
   order = Order.find(rand(1..Order.last.id))
-
   OrderItem.create(
       order_id: order.id,
       item_id: item.id,
       production_status:
       if order.order_status == "入金待ち"
-        :着手不可
+        0
       elsif order.order_status == "入金確認"
-        :製作待ち
+        1
       elsif order.order_status == "製作中"
-        :製作中
+        2
       elsif order.order_status == "発送準備中"
-        :製作完了
+        3
       elsif order.order_status == "発送済み"
-        :製作完了
+        3
       end,
       amount: rand(1..10),
       tax_price: (item.non_tax_price * 1.1).round
@@ -887,15 +892,15 @@ order_item_n.times do |n|
       item_id: item.id,
       production_status:
       if order.order_status == "入金待ち"
-        :着手不可
+        0
       elsif order.order_status == "入金確認"
-        :製作待ち
+        1
       elsif order.order_status == "製作中"
-        :製作中
+        2
       elsif order.order_status == "発送準備中"
-        :製作完了
+        3
       elsif order.order_status == "発送済み"
-        :製作完了
+        3
       end,
       amount: rand(1..10),
       tax_price: (item.non_tax_price * 1.1).round

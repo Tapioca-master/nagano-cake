@@ -16,12 +16,14 @@ class CustomersController < ApplicationController
     source = Rails.application.routes.recognize_path(request.referrer)
     if source[:action] == "exit"
       @customer.update(is_active: false)
+      flash[:success] = "退会処理が完了しました"
       redirect_to destroy_customer_session_path
     else
       if @customer.update(customer_params)
-
+        flash[:success] = "顧客情報を更新しました"
         redirect_to customer_path(@customer)
       else
+        flash[:danger] = "顧客情報を更新できませんでした"
         render :edit
       end
     end
