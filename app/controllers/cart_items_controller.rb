@@ -6,6 +6,18 @@ class CartItemsController < ApplicationController
     @cart_items = current_customer.cart_items
   end
 
+  def update
+    @cart_item = CartItem.find(params[:id])
+    if @cart_item.update(cart_item_params)
+      flash[:success] = "#{@cart_item.item.name} の数量を変更しました"
+      redirect_to cart_items_path
+    else
+      flash[:success] = "#{@cart_item.item.name} の数量を変更できませんでした"
+      @cart_items = current_customer.cart_items
+      render action: :index
+    end
+  end
+
   def create
     if cart_exist?(params[:cart_item][:item_id].to_i)
       cart_item  = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id].to_i)
@@ -88,6 +100,17 @@ class CartItemsController < ApplicationController
   end
 
   def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+    flash[:success] = "#{@cart_item.item.name}を削除しました"
+    redirect_to cart_items_path
+  end
+
+  def empty
+    @cart_item = CartItem.where(customer_id: current_customer)
+    @cart_item.delete_all
+    flash[:success] = "カートを空にしました"
+    redirect_to items_path
   end
 
   private
