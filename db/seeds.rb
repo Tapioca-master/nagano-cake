@@ -19,6 +19,18 @@ address_n = 20
 order_n = 30
 order_item_n = 100
 
+backend = Refile::Backend::FileSystem.new("tmp/uploads/store")
+# 時間があったらハッシュ{}で実装
+files = []
+image_file_names = ["shortcake.jpg","montblanc.jpg","chococake.jpg","fruitscake.jpg","rollcake.jpg","chiffoncake.jpg","gato_chocora.jpg","apple_pie.jpg",
+                    "poundcake.jpg","tarte.jpg","cheesecake.jpg","tiramisu.jpg","millefeuille.jpg","crepe.jpg","brandycake.jpg","chou.jpg","nameraka_pudding.jpg",
+                    "milkpudding.jpeg","choco_cookie.jpg","okara_cookie.jpeg","candy.jpeg"]
+  image_file_names.each do |image_file_name|
+    File.open("#{Rails.root}/app/assets/images/#{image_file_name}","rb") do |image_file|
+      files.push(backend.upload(image_file))
+    end
+  end
+
 Admin.create!(
   [
     {
@@ -433,8 +445,8 @@ Item.create!(
     {
       name: 'ショートケーキ',
       genre_id: 1,
-      #praice: ,
-      #image_id: ,
+      #price: ,
+      image_id: files[0].id,
       sales_status: :販売中,
       introduction: 'おいしいショートケーキです',
       non_tax_price: '250'
@@ -442,8 +454,8 @@ Item.create!(
     {
       name: 'モンブラン',
       genre_id: 1,
-      #praice: ,
-      #image_id: ,
+      #price: ,
+      image_id: files[1].id,
       sales_status: :販売中,
       introduction: 'おいしいモンブランです',
       non_tax_price: '300'
@@ -451,8 +463,8 @@ Item.create!(
     {
       name: 'チョコケーキ',
       genre_id: 1,
-      #praice: ,
-      #image_id: ,
+      #price: ,
+      image_id: files[2].id,
       sales_status: :販売中,
       introduction: 'おいしいチョコケーキです',
       non_tax_price: '210'
@@ -460,8 +472,8 @@ Item.create!(
     {
       name: 'フルーツケーキ',
       genre_id: 1,
-      #praice: ,
-      #image_id: ,
+      #price: ,
+      image_id: files[3].id,
       sales_status: :販売中,
       introduction: 'おいしいフルーツケーキです',
       non_tax_price: '270'
@@ -470,7 +482,7 @@ Item.create!(
       name: 'ロールケーキ',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[4].id,
       sales_status: :販売中,
       introduction: 'おいしいロールケーキです',
       non_tax_price: '180'
@@ -479,7 +491,7 @@ Item.create!(
       name: 'シフォンケーキ',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[5].id,
       sales_status: :販売中,
       introduction: 'おいしいシフォンケーキです',
       non_tax_price: '280'
@@ -488,7 +500,7 @@ Item.create!(
       name: 'ガトーショコラ',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[6].id,
       sales_status: :販売中,
       introduction: 'おいしいガトーショコラです',
       non_tax_price: '310'
@@ -497,7 +509,7 @@ Item.create!(
       name: 'りんごケーキ',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[7].id,
       sales_status: :販売中,
       introduction: 'おいしいりんごケーキです',
       non_tax_price: '200'
@@ -506,7 +518,7 @@ Item.create!(
       name: 'パウンドケーキ',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[8].id,
       sales_status: :販売中,
       introduction: 'おいしいパウンドケーキです',
       non_tax_price: '260'
@@ -515,7 +527,7 @@ Item.create!(
       name: 'タルト',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[9].id,
       sales_status: :販売中,
       introduction: 'おいしいタルトです',
       non_tax_price: '280'
@@ -524,7 +536,7 @@ Item.create!(
       name: 'チーズケーキ',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[10].id,
       sales_status: :販売中,
       introduction: 'おいしいチーズケーキです',
       non_tax_price: '300'
@@ -533,7 +545,7 @@ Item.create!(
       name: 'ティラミス',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[11].id,
       sales_status: :販売中,
       introduction: 'おいしいティラミスです',
       non_tax_price: '270'
@@ -542,7 +554,7 @@ Item.create!(
       name: 'ミルフィーユ',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[12].id,
       sales_status: :販売中,
       introduction: 'おいしいミルフィーユです',
       non_tax_price: '250'
@@ -551,25 +563,16 @@ Item.create!(
       name: 'クレープ',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[13].id,
       sales_status: :販売中,
       introduction: 'おいしいクレープです',
       non_tax_price: '280'
     },
     {
-      name: 'ガトーショコラ',
-      genre_id: 1,
-      #praice: ,
-      #image_id: ,
-      sales_status: :販売中,
-      introduction: 'おいしいガトーショコラです',
-      non_tax_price: '310'
-    },
-    {
       name: 'ブランデーケーキ',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[14].id,
       sales_status: :販売中,
       introduction: 'おいしいブランデーケーキです',
       non_tax_price: '310'
@@ -578,7 +581,7 @@ Item.create!(
       name: 'シュークリーム',
       genre_id: 1,
       #praice: ,
-      #image_id: ,
+      image_id: files[15].id,
       sales_status: :販売中,
       introduction: 'おいしいシュークリームです',
       non_tax_price: '200'
@@ -587,7 +590,7 @@ Item.create!(
       name: 'なめらかプリン',
       genre_id: 2,
       #praice: ,
-      #image_id: ,
+      image_id: files[16].id,
       sales_status: :販売中,
       introduction: 'おいしいプリンです',
       non_tax_price: '150'
@@ -596,7 +599,7 @@ Item.create!(
       name: '牛乳プリン',
       genre_id: 2,
       #praice: ,
-      #image_id: ,
+      image_id: files[17].id,
       sales_status: :販売中,
       introduction: 'おいしい牛乳プリンです',
       non_tax_price: '200'
@@ -605,7 +608,7 @@ Item.create!(
       name: 'チョコクッキー',
       genre_id: 3,
       #praice: ,
-      #image_id: ,
+      image_id: files[18].id,
       sales_status: :販売中,
       introduction: 'おいしいチョコクッキーです',
       non_tax_price: '100'
@@ -614,7 +617,7 @@ Item.create!(
       name: 'おからクッキー',
       genre_id: 3,
       #praice: ,
-      #image_id: ,
+      image_id: files[19].id,
       sales_status: :販売中,
       introduction: 'おいしいおからクッキーです',
       non_tax_price: '100'
@@ -623,7 +626,7 @@ Item.create!(
       name: 'キャンディー10個',
       genre_id: 4,
       #praice: ,
-      #image_id: ,
+      image_id: files[20].id,
       sales_status: :販売中,
       introduction: 'おいしいキャンディーです',
       non_tax_price: '100'
@@ -632,7 +635,7 @@ Item.create!(
       name: 'キャンディー30個',
       genre_id: 4,
       #praice: ,
-      #image_id: ,
+      image_id: files[20].id,
       sales_status: :販売中,
       introduction: 'おいしいキャンディーです',
       non_tax_price: '250'

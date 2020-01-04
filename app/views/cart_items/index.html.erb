@@ -3,11 +3,11 @@
 	<table class="table table-bordered">
 		<thead class="thead-light">
 		    <tr>
-				  <th>商品名</th>
-			      <th>単価(税込)</th>
-				  <th>個数</th>
-				  <th>小計</th>
-				  <th></th>
+				  <th class="col-md-5">商品名</th>
+			      <th clas="col-md-2">単価(税込)</th>
+				  <th class="col-md-2">個数</th>
+				  <th class="col-md-2">小計</th>
+				  <th class="col-md-1"></th>
 	        </tr>
 		</thead>
 		<tbody>
@@ -38,13 +38,15 @@
 	  <div class= "col-sm-3">
 	    <%= link_to "買い物を続ける", items_path, class: 'btn btn-primary' %>
 	  </div>
-	  <div class= "col-sm-7">
+	  <div class= "col-sm-5">
 	  </div>
 	  <div class= "col-sm-1 kingaku">
 		合計金額
 	  </div>
 	  <div class= "col-sm-1 suzi">
-	    <%= total %>
+	    <%= "¥#{total}" %>
+	  </div>
+	  <div class="col-sm-2">
 	  </div>
     </div>
       <div class= text-center>
