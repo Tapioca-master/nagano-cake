@@ -105,40 +105,32 @@
     <div class="wrapper"style="min-height: 100vh;position: relative;padding-bottom: 200px;box-sizing: border-box;";>
         <div class="container">
             <div class="row">
-              
               <!-- flash表示ここから -->
-    <div class="row　flash text-center">
-        <% if flash[:notice] %>
-        <p class="text-primary">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-            <%= flash[:notice] %>
-        </p>
-        <% end %>
-        <% if flash[:success] %>
-        <p class="text-success">
-            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-            <%= flash[:success] %>
-        </p>
-        <% end %>
-        <% if flash[:danger] %>
-        <p class="text-danger">
-            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-            <%= flash[:danger] %>
-        </p>
-        <% end %>
-    </div>
-    <!-- flash表示ここまで -->
-                
+                <div class="row　flash text-center">
+                    <% if flash[:notice] %>
+                    <p class="text-primary">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        <%= flash[:notice] %>
+                    </p>
+                    <% end %>
+                    <% if flash[:success] %>
+                    <p class="text-success">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                        <%= flash[:success] %>
+                    </p>
+                    <% end %>
+                    <% if flash[:danger] %>
+                    <p class="text-danger">
+                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                        <%= flash[:danger] %>
+                    </p>
+                    <% end %>
+                </div>
+              <!-- flash表示ここまで -->
                 <%= yield %>
             </div>
         </div>
         <footer class="page-footer font-lage pt-4"style="position: absolute;bottom: 0;width: 100%;background-size: cover;height: 200px; background-position: 0px 400px ;background-image: url(/assets/background-image1.jpg)">
-    <div class="container">
-        <div class="row">
-            <%= yield %>
-        </div>
-        <footer class="page-footer font-small pt-4">
-            <!-- Footer Elements -->
             <div class="container">
                 <!-- Social buttons -->
                 <ul class="list-unstyled list-inline text-center">
@@ -158,16 +150,17 @@
                         </a>
                     </li>
                 </ul>
-            <div class="row" style="text-align: center;">
-                <h5>営業時間</h5>
-                <p>時間 / 11:00～17:00(月～金)<br>
-                休業日 / 土曜日 日曜日 ・祝日<br>
-                住所：〒999-9999　○○県○○市○○町○○　99-99<br>
-                TEL：99-9999-9999<br>
-                MAIL：sample@shop.rakuten.co.jp<br></p>
-            </div>
-            <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                <a href=""> NaganoCake</a>
+                <div class="row" style="text-align: center;">
+                    <h5>営業時間</h5>
+                    <p>時間 / 11:00～17:00(月～金)<br>
+                    休業日 / 土曜日 日曜日 ・祝日<br>
+                    住所：〒999-9999　○○県○○市○○町○○　99-99<br>
+                    TEL：99-9999-9999<br>
+                    MAIL：sample@shop.rakuten.co.jp<br></p>
+                </div>
+                <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                    <a href=""> NaganoCake</a>
+                </div>
             </div>
         </footer>
     </div>
