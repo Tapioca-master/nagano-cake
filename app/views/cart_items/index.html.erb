@@ -16,10 +16,9 @@
 						<%= cart_item.item.name %></td>
 					<td><%= "¥#{(cart_item.item.non_tax_price* 1.1).round}（税込）"  %></td>
 					<td><%= form_for cart_item do |f| %>
-                        <%= f.select :amount, [["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10]] %>
-						<%= f.submit "変更", class: 'btn btn-primary' %>
-						<% end %>
-					</td>
+						<%= f.text_field :amount, :size=>"5" %>
+						<%= f.submit "変更", class: 'btn-sm btn-primary' %>
+						<% end %></td>
 					<td><%= "¥#{(cart_item.item.non_tax_price*cart_item.amount* 1.1).round}（税込）"  %></td>
 					<td><%= button_to '削除する', cart_item_path(cart_item), method: :delete, data: {confirm: '商品を削除しますか？'}, class: 'btn-sm btn-danger center-block'%></td>
 
@@ -39,7 +38,7 @@
 	  	合計金額
 	  </div>
 	  <div class= "col-sm-1 suzi">
-		  <%= "¥#{total.to_s(:delimited)}" %>
+		<%= "¥#{total.to_s(:delimited)}" %>
 	  </div>
     </div>
 
