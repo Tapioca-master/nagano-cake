@@ -4,88 +4,140 @@
 
 
 .jumbotron {
- background:url(tapioca.jpg) center no-repeat;
- background-size: cover;
- }
+    background: url(tapioca.jpg) center no-repeat;
+    background-size: cover;
+}
 
-	.entry-content dd,
-	.entry-content ol,
-	.entry-content ul {
-	margin: 0;padding: 0;
-	}
+.entry-content dd,
+.entry-content ol,
+.entry-content ul {
+    margin: 0;
+    padding: 0;
+}
 
-	.entry-content a {
-	text-decoration:none;
-	}
+.entry-content a {
+    text-decoration: none;
+}
 
-	.profile-center {
-	 text-align: center;
-	 margin-bottom: 15px;
-	 }
+.profile-center {
+    text-align: center;
+    margin-bottom: 15px;
+}
 
-	 .page-about h2 {
-	 border-bottom: 5px solid #8EDAE5;
-	 text-align: center;
-	 padding: 1em 4% 5px 4%;
-	 margin: 1em -2% 1em -2%;
-	 }
+.page-about h2 {
+    border-bottom: 5px solid #8EDAE5;
+    text-align: center;
+    padding: 1em 4% 5px 4%;
+    margin: 1em -2% 1em -2%;
+}
 
-	 .page-about h3 {
-	 border-left: 5px solid #8EDAE5;
-	 padding: 0.5rem;
-	 margin: 1.5em 0 1em 0;
-	 }
+.page-about h3 {
+    border-left: 5px solid #8EDAE5;
+    padding: 0.5rem;
+    margin: 1.5em 0 1em 0;
+}
 
-	 .page-about .about-blog {
-	 background-color: #fff;
-	 padding: 10px 12px;
-	 border-radius: 6px;
-	 border: 2px solid;
-	 color: #F99695;
-	 font-size: 1.2em;
-	 }
+.page-about .about-blog {
+    background-color: #fff;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 2px solid;
+    color: #F99695;
+    font-size: 1.2em;
+}
 
-	 .entry-content .widget-menu {
-	 text-align: center;
-	 list-style-type: none;
-	 margin: 0;
-	 overflow: hidden;
-	 padding: 5px;
-	 }
+.entry-content .widget-menu {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 5px;
+}
 
-	 .widget-menu li {
-	 float: left;
-	 width: 46%;
-	 border: solid 2px #676F74;
-	 font-size: 12px;
-	 vertical-align: middle;
-	 background: #FFF;
-	 list-style-type: none;
-	 padding: 10px;
-	 }
+.widget-menu li {
+    float: left;
+    width: 46%;
+    border: solid 2px #676F74;
+    font-size: 12px;
+    vertical-align: middle;
+    background: #FFF;
+    list-style-type: none;
+    padding: 10px;
+}
 
-	 .widget-menu li:hover{
-	 box-shadow: 0 10px 15px -5px rgba(0,0,0,.15),0 0 5px rgba(0,0,0,.1);
-	 transform: translateY(-3px);
-	 transition: 0.3s;
-	 background: rgba(238,238,238,.4);
-	 }
+.widget-menu li:hover {
+    box-shadow: 0 10px 15px -5px rgba(0, 0, 0, .15), 0 0 5px rgba(0, 0, 0, .1);
+    transform: translateY(-3px);
+    transition: 0.3s;
+    background: rgba(238, 238, 238, .4);
+}
 
-	 .widget-menu li:nth-child(even) {
-	 border-left: solid 0px #676F74;
-	 }
+.widget-menu li:nth-child(even) {
+    border-left: solid 0px #676F74;
+}
 
-	 .widget-menu li:last-child,
-	 .widget-menu li:nth-last-child(2) {
-	 border-top: 0;
-	 }
-	 .widget-menu .fa {
-	 display: block;	font-size: 3em;
-	 }
+.widget-menu li:last-child,
+.widget-menu li:nth-last-child(2) {
+    border-top: 0;
+}
 
-	 .widget
+.widget-menu .fa {
+    display: block;
+    font-size: 3em;
+}
 
-	 .follow_btn {
-	 margin-top: 0;
-	 text-align: center;
-	 }
+.widget .follow_btn {
+    margin-top: 0;
+    text-align: center;
+}
+
+
+///////// aki /////////
+.first-visual {
+    background-image: url(/assets/about1.jpg);
+}
+
+.second-visual {
+    background-image: url(/assets/choco_cookie.jpg);
+}
+
+.third-visual {
+    background-image: url(/assets/okara_cookie.jpg);
+}
+
+.fluid-box {
+    height: 800px;
+    background-size: cover;
+
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    //background-color: #ddd;
+    padding: 0px;
+}
+
+.fluid-box-inner {
+    margin: 0 auto;
+    padding: 25px;
+    text-align: center;
+    //background-color: #fff;
+}
+
+.bg-mask-w {
+  height: 100%;
+  background: rgba(255,255,255,0.6);
+  color: #000000;
+}
+
+.bg-mask-b {
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  color: #FFFFFF;
+}
+
+.content-center {
+    text-align: center;
+    display: inline-block;
+}
+///////////////////////

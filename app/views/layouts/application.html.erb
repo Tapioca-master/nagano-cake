@@ -9,6 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/46860f55f1.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #ffeaff;">
         <div class="container-fluid">
@@ -22,76 +23,113 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarEexample1">
                 <div class="navbar-right">
-                    <ul class="nav navbar-nav"style="color: black;">
+                    <ul class="nav navbar-nav" style="color: black;">
                         <!-- Customerがログインしている時 -->
                         <% if current_customer %>
                         <li class="">
-                            <%= link_to "#{current_customer.name_last}　#{current_customer.name_first}さん", customer_path(current_customer) %>
+                            <%= link_to customer_path(current_customer) do %>
+                            <i class="fas fa-user">
+                                <%= " #{current_customer.name_last}#{current_customer.name_first}さん" %></i>
+                            <% end %>
                         </li>
                         <li class="">
                             <%= link_to items_path, method: :get do %>
                             <i class="fas fa-home"></i>
-
                             <% end %>
                         </li>
                         <li class="">
                             <%= link_to cart_items_path method: :get do%>
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-shopping-cart"> <span class="badge">
+                                    <%= @cart_count_nav %></span></i>
                             <% end %>
                         </li>
                         <li class="">
-                            <%= link_to "Logout", destroy_customer_session_path, method: :delete %>
+                            <%= link_to destroy_customer_session_path, method: :delete do %>
+                            <i class="fas fa-sign-out-alt"> Logout</i>
+                            <% end %>
                         </li>
                         <li class="">
-                            <%= link_to "About", items_about_path %>
+                            <%= link_to items_about_path do %>
+                            <i class="fas fa-store">About</i>
+                            <% end %>
                         </li>
                         <!-- Adminがログインしている時 -->
                         <% elsif current_admin %>
-                      <!-- Item検索機能ここから -->
-                            <li>
-                                <% elsif current_admin %>
-                                <%= form_tag(admins_items_path,:method => 'get') do %>
-                                <%= text_field_tag :search %>
-                                <%= submit_tag "商品検索", :name => nil %>
-                                <% end %>
-                                </ll>
-                                <!-- Item検索機能ここまで -->
-                                <!-- Customer検索機能ここから -->
-                            <li>
-                                <%= form_tag(admins_customers_path,:method => 'get') do %>
-                                <%= text_field_tag :search %>
-                                <%= submit_tag "顧客検索", :name => nil %>
-                                <% end %>
-                            </li>
-                            <!-- Customer検索機能ここまで -->
+                        <!-- Item検索機能ここから -->
+                        <li style="padding: 10px 10px;">
+                            <%= form_tag(admins_items_path,:method => 'get') do %>
+                            <div class="input-group" style="width: 150px;">
+                                <%= text_field_tag :search, "商品" , {class: "form-control"} %>
+                                <span class="input-group-btn">
+                                    <%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
+                                    <i class="fa fa-search"></i>
+                                    <% end %>
+                                </span>
+                            </div>
+                            <% end %>
+                            </ll>
+                            <!-- Item検索機能ここまで -->
+                            <!-- Customer検索機能ここから -->
+                        <li style="padding: 10px 10px;">
+                            <%= form_tag(admins_customers_path,:method => 'get') do %>
+                            <div class="input-group" style="width: 150px;">
+                                <%= text_field_tag :search, "顧客", {class: "form-control"} %>
+                                <span class="input-group-btn">
+                                    <%= button_tag :type => "submit", :class =>"btn btn-primary" do %>
+                                    <i class="fa fa-search"></i>
+                                    <% end %>
+                                </span>
+                            </div>
+                            <% end %>
+                        </li>
+                        <!-- Customer検索機能ここまで -->
                         <li class="">
-                            <%= link_to "#{current_admin.name}さん" %>
+                            <%= link_to do%>
+                            <i class="fas fa-user-cog">
+                                <%= " #{current_admin.name}さん" %></i>
+                            <% end %>
                         </li>
                         <li class="">
-                            <%= link_to "Genres", admins_genres_path %>
+                            <%= link_to admins_genres_path do %>
+                            <i class="fas fa-object-group"> Genres</i>
+                            <% end %>
                         </li>
                         <li class="">
-                            <%= link_to "Customers", admins_customers_path %>
+                            <%= link_to admins_customers_path do%>
+                            <i class="fas fa-user-friends"> Customers</i>
+                            <% end %>
                         </li>
                         <li class="">
-                            <%= link_to "Orders", admins_orders_path %>
+                            <%= link_to admins_orders_path do %>
+                            <i class="fas fa-sticky-note"> Orders</i>
+                            <% end %>
                         </li>
                         <li class="">
-                            <%= link_to "Items", admins_items_path %>
+                            <%= link_to admins_items_path do %>
+                            <i class="fas fa-birthday-cake"> Items</i>
+                            <% end %>
                         </li>
                         <li class="">
-                            <%= link_to "logout", destroy_admin_session_path, method: :delete %>
+                            <%= link_to destroy_admin_session_path, method: :delete do %>
+                            <i class="fas fa-sign-out-alt"> Logout</i>
+                            <% end %>
                         </li>
                         <!-- いずれもログインしていない時 -->
                         <% else %>
                         <li class="">
-                            <%= link_to "Login", new_customer_session_path %>
+                            <%= link_to new_customer_session_path do %>
+                            <i class="fas fa-sign-in-alt"> Login</i>
+                            <% end %>
                         </li>
                         <li class="">
-                            <%= link_to "Signup", new_customer_registration_path %>
+                            <%= link_to new_customer_registration_path do %>
+                            <i class="fas fa-user-plus"> Signup</i>
+                            <% end %>
                         </li>
                         <li class="">
-                            <%= link_to "About", items_about_path %>
+                            <%= link_to items_about_path do %>
+                            <i class="fas fa-store"> About</i>
+                            <% end %>
                         </li>
                         <% end %>
                     </ul>
@@ -100,12 +138,12 @@
         </div>
     </nav>
     <header style="background-size: cover;background-position: 0px 950px ;background-image: url(/assets/background-image1.jpg)">
-         <%= link_to image_tag("/assets/logo-s.png",width: '200'), items_path %>
+        <%= link_to image_tag("/assets/logo-s.png",width: '200'), items_path %>
     </header>
-    <div class="wrapper"style="min-height: 100vh;position: relative;padding-bottom: 200px;box-sizing: border-box;";>
+    <div class="wrapper" style="min-height: 100vh;position: relative;padding-bottom: 200px;box-sizing: border-box;" ;>
         <div class="container">
             <div class="row">
-              <!-- flash表示ここから -->
+                <!-- flash表示ここから -->
                 <div class="row　flash text-center">
                     <% if flash[:notice] %>
                     <p class="text-primary">
@@ -126,14 +164,14 @@
                     </p>
                     <% end %>
                 </div>
-              <!-- flash表示ここまで -->
+                <!-- flash表示ここまで -->
                 <%= yield %>
             </div>
         </div>
-        <footer class="page-footer font-lage pt-4"style="position: absolute;bottom: 0;width: 100%;background-size: cover;height: 200px; background-position: 0px 400px ;background-image: url(/assets/background-image1.jpg)">
+        <footer class="page-footer font-lage pt-4" style="position: absolute;bottom: 0;width: 100%;background-size: cover;height: 200px; background-position: 0px 400px ;background-image: url(/assets/background-image1.jpg)">
             <div class="container">
                 <!-- Social buttons -->
-                <ul class="list-unstyled list-inline text-center">
+                <ul class="list-unstyled list-inline text-center" style="margin-top: 10px;">
                     <li class="list-inline-item">
                         <a class="btn-floating btn-fb mx-1">
                             <i class="fab fa-facebook-f"> </i>
@@ -153,10 +191,10 @@
                 <div class="row" style="text-align: center;">
                     <h5>営業時間</h5>
                     <p>時間 / 11:00～17:00(月～金)<br>
-                    休業日 / 土曜日 日曜日 ・祝日<br>
-                    住所：〒999-9999　○○県○○市○○町○○　99-99<br>
-                    TEL：99-9999-9999<br>
-                    MAIL：sample@shop.rakuten.co.jp<br></p>
+                        休業日 / 土曜日 日曜日 ・祝日<br>
+                        住所：〒999-9999　○○県○○市○○町○○　99-99<br>
+                        TEL：99-9999-9999<br>
+                        MAIL：sample@shop.rakuten.co.jp<br></p>
                 </div>
                 <div class="footer-copyright text-center py-3">© 2020 Copyright:
                     <a href=""> NaganoCake</a>
@@ -165,4 +203,5 @@
         </footer>
     </div>
 </body>
+
 </html>
