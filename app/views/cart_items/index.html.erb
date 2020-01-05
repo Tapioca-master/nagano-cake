@@ -1,51 +1,73 @@
-<div class= "container">
-<h3>ショッピングカート</h3>
-	<table class="table table-striped table-bordered table-hover">
-			<tr>
-				<th>商品名</th>
-				<th>単価(税込)</th>
-				<th>個数</th>
-				<th>小計</th>
-				<th><%= button_to 'カートを空にする', empty_cart_items_path, method: :delete, data: {confirm: 'カートを削除してよろしいですか？'},  class: 'btn-sm btn-danger center-block' %></th>
-			</tr>
-		<tbody>
-			<% total = 0 %>
-			<% @cart_items.each do |cart_item| %>
-				<tr>
-					<td><%= attachment_image_tag cart_item.item, :image, :fill,50, 30, format: 'jpeg', fallback: "no_image.jpg", size:'50x30' %>
-						<%= cart_item.item.name %></td>
-					<td><%= "¥#{(cart_item.item.non_tax_price* 1.1).round}（税込）"  %></td>
-					<td><%= form_for cart_item do |f| %>
-						<%= f.text_field :amount, :size=>"5" %>
-						<%= f.submit "変更", class: 'btn-sm btn-primary' %>
-						<% end %></td>
-					<td><%= "¥#{(cart_item.item.non_tax_price*cart_item.amount* 1.1).round}（税込）"  %></td>
-					<td><%= button_to '削除する', cart_item_path(cart_item), method: :delete, data: {confirm: '商品を削除しますか？'}, class: 'btn-sm btn-danger center-block'%></td>
-
-				    <% total = total + (cart_item.item.non_tax_price*cart_item.amount*1.1).round %>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
-
-	<div class= "row">
-	  <div class= "col-sm-3">
-	  <%= link_to "買い物を続ける", items_path, class: 'btn-sm btn-primary' %>
-	  </div>
-	  <div class= "col-sm-5">
-	  </div>
-	  <div class= "col-sm-1 kingaku">
-	  	合計金額
-	  </div>
-	  <div class= "col-sm-1 suzi">
-		<%= "¥#{total.to_s(:delimited)}" %>
-	  </div>
+<div class="container">
+    <h3>ショッピングカート</h3>
+    <table class="table table-content">
+        <tr class="info">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>個数</th>
+            <th>小計</th>
+            <th>
+                <%= button_to 'カートを空にする', empty_cart_items_path, method: :delete, data: {confirm: 'カートを削除してよろしいですか？'},  class: 'btn-sm btn-danger center-block' %>
+            </th>
+        </tr>
+        <tbody>
+            <% total = 0 %>
+            <% @cart_items.each do |cart_item| %>
+            <tr>
+                <td>
+                    <%= attachment_image_tag cart_item.item, :image, :fill,50, 30, format: 'jpeg', fallback: "no_image.jpg", size:'50x30' %>
+                    <%= cart_item.item.name %>
+                </td>
+                <td>
+                    <%= "¥#{(cart_item.item.non_tax_price* 1.1).round}（税込）"  %>
+                </td>
+                <td>
+                    <%= form_for cart_item do |f| %>
+                    <div class="input-group"  style="width: 120px;">
+                        <%= f.text_field :amount, :size=>"5", class: "form-control"%>
+                        <span class="input-group-btn">
+                            <%= f.submit "変更", class: "btn btn-primary" %>
+                        </span>
+                    </div>
+                    <% end %>
+                </td>
+                <td>
+                    <%= "¥#{(cart_item.item.non_tax_price*cart_item.amount* 1.1).round}（税込）"  %>
+                </td>
+                <td>
+                    <%= button_to '削除する', cart_item_path(cart_item), method: :delete, data: {confirm: '商品を削除しますか？'}, class: 'btn-sm btn-danger center-block'%>
+                </td>
+                <% total = total + (cart_item.item.non_tax_price*cart_item.amount*1.1).round %>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-6">
+            <%= link_to "買い物を続ける", items_path, class: 'btn-sm btn-primary' %>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+            <div style="display: inline-block;">
+                <table>
+                    <tr>
+                        <td class="kingaku">合計金額</td>
+                        <td class="suzi">
+                            <%= "¥#{total.to_s(:delimited)}" %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-
-      <div class= text-right>
-      	<% if current_customer.cart_items != [] %>
-      	<%= link_to "情報入力に進む", cart_items_info_path, class: 'btn-sm btn-primary' %><br>
-      	<br>
-      	<% end %>
-      </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class=text-right>
+                <% if current_customer.cart_items != [] %>
+                <%= link_to "情報入力に進む", cart_items_info_path, class: 'btn-sm btn-primary' %><br>
+                <br>
+                <% end %>
+            </div>
+        </div>
+    </div>
 </div>
