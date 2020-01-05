@@ -30,7 +30,7 @@
 						<td>
 				    		<% sum = 0 %>
 				            <% @order_item.each do |order_item| %>
-				            <% sum += order_item.tax_price %>
+				            <% sum += order_item.tax_price*order_item.amount %>
 				            <% end %>
 				            <%= sum %>円
 			            </td>
@@ -44,7 +44,7 @@
 						<td>
 				    		<% sum = 0 %>
 				            <% @order_item.each do |order_item| %>
-				            <% sum += order_item.tax_price %>
+				            <% sum += order_item.tax_price*order_item.amount %>
 				            <% end %>
 				            <%= sum + @order.shipping %>円</td>
 					</tr>
