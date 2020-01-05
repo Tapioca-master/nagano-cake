@@ -1,33 +1,45 @@
-<div class="container"style="padding-top: 30px">
+<div class="container" style="padding-top: 30px">
     <div class="row">
         <div class="col-md-2">
-            <p>ジャンル検索</p>
-            <ul class="list-group">
-                <% @genres.each do |genre| %>
-                <li class="list-group-item">
-                        <%= link_to genre.name, items_genre_path(genre) %>
-                </li>
-                <% end %>
-            </ul>
+            <div class="panel panel-primary" style="text-align: center;">
+                <div class="panel-heading">
+                    <b>ジャンル検索</b>
+                </div>
+                <ul class="list-group">
+                    <% i = 0 %>
+                    <% @genres.each do |genre| %>
+                    <%= link_to items_genre_path(genre), class: "list-group-item" do %>
+                    <%= genre.name %>
+                    <span class="badge"><%= @genre_count[i].to_s %></span>
+                    <% end %>
+                    <% i += 1 %>
+                    <% end %>
+                </ul>
+            </div>
         </div>
-        <div class="col-md-4">
-            <%= attachment_image_tag @item, :image, :fill, 300, 200, format: 'jpeg', fallback: "no_image.jpg", size:'300x200' %>
+        <div class="col-md-5 content-center">
+            <%= attachment_image_tag @item, :image, :fill, 700, 500, format: 'jpeg', fallback: "no_image.jpg", size:'300x200' %>
         </div>
-        <div class="col-md-6">
-            <p>
-                <%= @item.name %>
-            </p>
+        <div class="col-md-5">
+            <h2 style="border-bottom: solid 1px #CCCCCC; padding-bottom: 10px;">
+                <b>
+                    <%= @item.name %></b>
+            </h2>
             <p>
                 <%= @item.introduction %>
             </p>
             <p>
-                <%= "¥#{(@item.non_tax_price * 1.1).round}（税込）" %>
+                <b>
+                    <%= "¥#{(@item.non_tax_price * 1.1).round}（税込）" %></b>
             </p>
             <%= form_for @cart_item do |f| %>
-              <%= f.hidden_field :item_id, :value => @item.id %>
-              <%= f.hidden_field :customer_id, :value => current_customer.id  %>
-            <%= f.select :amount, [["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10]] %>
-            <%= f.submit "カートに入れる" %>
+            <%= f.hidden_field :item_id, :value => @item.id %>
+            <%= f.hidden_field :customer_id, :value => current_customer.id  %>
+            <div class="dropdown">
+                <%= f.select :amount, [["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10]], class: "dropdown-menu"%><span> 個</span>
+            </div>
+            <br>
+            <%= f.submit "カートに入れる", class: "btn-sm btn-primary" %>
             <% end %>
         </div>
     </div>

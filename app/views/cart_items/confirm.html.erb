@@ -1,51 +1,84 @@
-
-<h2>注文情報確認</h2>
-<table class="table table-striped table-bordered table-hover">
-	<tbody>
-		<tr>
-			<th>商品名</th>
-			<th>単価(税込)</th>
-			<th>数量</th>
-			<th>小計</th>
-		</tr>
-		<% total = 0 %>
-		<% @cart_items.each do |item| %>
-		<tr>
-			<td><%= item.item.name %></td>
-			<td><%= tax_price = "¥#{((item.item.non_tax_price * @tax).floor).to_s(:delimited)}" %>
-
-			</td>
-			<td><%= item.amount %></td>
-			<td>
-				<%= "¥#{((item.item.non_tax_price * @tax).floor * item.amount).to_s(:delimited)}" %>
-			</td>
-		</tr>
-		<% total = total + (item.item.non_tax_price*item.amount*@tax).round %>
-		<% end %>
-	</tbody>
-</table>
-
-<table class="table table-striped table-bordered table-hover">
-	<tbody>
-		<tr>
-		  <th>送料</th>
-		  <td>¥800</td>
-		</tr>
-		<tr>
-		  <th>商品合計</th>
-		  <td>
-			<%= "¥#{total.to_s(:delimited)}" %>
-		  </td>
-		</tr>
-		<tr>
-		  <th>請求金額</th>
-		  <td><%= "¥#{(800 + total).to_s(:delimited)}" %></td>
-		</tr>
-	</tbody>
-</table>
-
-	<p>支払方法 <%= @payment %></p>
-	<p>お届け先 <%= "#{@postal_code} #{@address} #{@name}" %>
-	</p>
-
-	<%= link_to "購入を確定する", cart_items_thanks_path(:ship_name => @name, :address => @address, :postal_code => @postal_code, :payment => @payment) %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+        	<h2>注文情報確認</h2>
+            <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <th>商品名</th>
+                        <th>単価(税込)</th>
+                        <th>数量</th>
+                        <th>小計</th>
+                    </tr>
+                    <% total = 0 %>
+                    <% @cart_items.each do |item| %>
+                    <tr>
+                        <td>
+                            <%= item.item.name %>
+                        </td>
+                        <td>
+                            <%= tax_price = "¥#{((item.item.non_tax_price * @tax).floor).to_s(:delimited)}" %>
+                        </td>
+                        <td>
+                            <%= item.amount %>
+                        </td>
+                        <td>
+                            <%= "¥#{((item.item.non_tax_price * @tax).floor * item.amount).to_s(:delimited)}" %>
+                        </td>
+                    </tr>
+                    <% total = total + (item.item.non_tax_price*item.amount*@tax).round %>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <th>送料</th>
+                        <td>¥800</td>
+                    </tr>
+                    <tr>
+                        <th>商品合計</th>
+                        <td>
+                            <%= "¥#{total.to_s(:delimited)}" %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>請求金額</th>
+                        <td>
+                            <%= "¥#{(800 + total).to_s(:delimited)}" %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <p><b>支払方法</b>
+                <%= @payment %>
+            </p>
+            <p><b>お届け先</b>
+                <%= "#{@postal_code} #{@address} #{@name}" %>
+            </p>
+            <%= link_to cart_items_thanks_path(:ship_name => @name, :address => @address, :postal_code => @postal_code, :payment => @payment), class: "btn btn-primary" do %>
+            <b>購入する</b>
+            <% end %>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>

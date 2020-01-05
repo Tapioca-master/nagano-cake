@@ -28,6 +28,11 @@ class ItemsController < ApplicationController
   def show
   	# 有効なジャンルを取得する(aki)
   	@genres = Genre.where(is_active: true)
+    @genre_count = []
+    @genres.each do |genre|
+      @genre_count << Item.where(genre_id: genre.id).count
+    end
+
 
   	@item = Item.find(params[:id])
   	@cart_item = CartItem.new(item_id: @item.id)
