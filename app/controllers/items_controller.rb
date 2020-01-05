@@ -9,6 +9,11 @@ class ItemsController < ApplicationController
 
   	# 有効なジャンルを取得する(aki)
   	@genres = Genre.where(is_active: true)
+    @genre_count = []
+    @genres.each do |genre|
+      @genre_count << Item.where(genre_id: genre.id).count
+    end
+
 
   	# URLでgenre指定がない場合(items_path)、もしくは無効なジャンルを指定された場合はidが若い有効なジャンルをリダイレクトで指定する(aki)
   	genre = Genre.find_by(id: params[:id])
