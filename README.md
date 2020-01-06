@@ -17,7 +17,6 @@ NAGANO-CAKE
 
 # Requirement
 ruby '2.5.7'
-gem 'rails', '~> 5.2.4'
 gem 'devise'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
