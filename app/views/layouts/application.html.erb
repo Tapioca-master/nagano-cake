@@ -137,7 +137,7 @@
             </div>
         </div>
     </nav>
-    <header style="background-size: cover;background-position: 0px 950px ;background-image: url(/assets/background-image1.jpg)">
+    <header style="background-size: cover;background-position: 0px 950px ;background-image: url(/assets/background-image1.jpg); position: relative; z-index: 1;">
         <%= link_to image_tag("/assets/logo-s.png",width: '200'), items_path %>
     </header>
     <div class="fluid-box2 fourth-visual">
@@ -148,22 +148,28 @@
                         <!-- flash表示ここから -->
                         <div class="row　flash text-center">
                             <% if flash[:notice] %>
-                            <span class="label label-primary">
-                                <i class="fas fa-info-circle"></i>
-                                <%= flash[:notice] %>
-                            </span>
+                            <div class="flash-deco">
+                                <span class="label label-primary">
+                                    <i class="fas fa-info-circle"></i>
+                                    <%= flash[:notice] %>
+                                </span>
+                            </div>
                             <% end %>
                             <% if flash[:success] %>
-                            <span class="label label-success">
-                                <i class="fas fa-check-circle"></i>
-                                <%= flash[:success] %>
-                            </span>
+                            <div class="flash-deco">
+                                <span class="label label-success">
+                                    <i class="fas fa-check-circle"></i>
+                                    <%= flash[:success] %>
+                                </span>
+                            </div>
                             <% end %>
                             <% if flash[:danger] %>
-                            <span class="label label-danger">
-                                <i class="fas fa-exclamation-circle"></i>
-                                <%= flash[:danger] %>
-                            </span>
+                            <div class="flash-deco">
+                                <span class="label label-danger">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <%= flash[:danger] %>
+                                </span>
+                            </div>
                             <% end %>
                         </div>
                         <!-- flash表示ここまで -->
