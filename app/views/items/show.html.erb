@@ -32,6 +32,8 @@
                 <b>
                     <%= "¥#{(@item.non_tax_price * 1.1).round}（税込）" %></b>
             </p>
+            <!-- ログインしていない場合は個数選択およびボタンは表示させない -->
+            <% if current_customer %>
             <%= form_for @cart_item do |f| %>
             <%= f.hidden_field :item_id, :value => @item.id %>
             <%= f.hidden_field :customer_id, :value => current_customer.id  %>
@@ -40,6 +42,7 @@
             </div>
             <br>
             <%= f.submit "カートに入れる", class: "btn-sm btn-primary" %>
+            <% end %>
             <% end %>
         </div>
     </div>

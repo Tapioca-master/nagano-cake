@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_customer!, only: [:show]
+  # before_action :authenticate_customer!, only: [:show]
 
 
 	# TOPページkaminari表示数設定(aki)
