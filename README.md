@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# NAME
+NAGANO-CAKE
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# DEMO
+![readmegif_cart ](https://user-images.githubusercontent.com/57820414/71799602-1e051300-3099-11ea-96f3-8fa691462eef.gif)
