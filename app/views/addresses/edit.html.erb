@@ -1,18 +1,39 @@
-<h1>配送先編集</h1>
-<%= form_for(@address) do |f| %>
-<table>
-    <tr>
-        <td>郵便番号（ハイフンあり7桁）</td>
-        <td><%= f.text_field :postal_code %></td>
-    </tr>
-    <tr>
-    	<td>住所</td>
-    	<td><%= f.text_field :address %></td>
-    </tr>
-    <tr>
-    	<td>宛名</td>
-    	<td><%= f.text_field :name %></td>
-    </tr>
-</table>
-<%= f.submit "編集する" %>
-<% end %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h1>配送先編集</h1>
+            <%= form_for(@address) do |f| %>
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="text-align: center;">
+                    <b>注文情報</b>
+                </div>
+                <table class="table table-bordered table-content">
+                    <tr>
+                        <th class="info">郵便番号（ハイフンあり7桁）</th>
+                        <td>
+                            <%= f.text_field :postal_code, class: "text-field-lage" %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="info">住所</th>
+                        <td>
+                            <%= f.text_field :address, class: "text-field-lage" %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="info">宛名</th>
+                        <td>
+                            <%= f.text_field :name, class: "text-field-lage" %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="text-align: right;">
+                <%= f.submit "更新", class: "btn-sm btn-primary" %>
+            </div>
+            <% end %>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
