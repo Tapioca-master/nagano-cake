@@ -36,12 +36,17 @@ var postalElem = document.getElementById("postal_code");
 var addressElem = document.getElementById("address");
 var nameElem = document.getElementById("name");
 var registerdElem = document.getElementById("ship_nummber");
+var radiobuttonRegisterd = document.getElementById("ship_address_registered_address")
 
 postalElem.disabled = true;
 addressElem.disabled = true;
 nameElem.disabled = true;
 registerdElem.disabled = true;
-    
+if(registerdElem.value == ""){
+radiobuttonRegisterd.disabled = true;
+}
+
+
     checkOption.forEach(function(e) {
         e.addEventListener("click", function() {
 					var shipValue = document.querySelector("input:checked[name=ship_address]").value;
