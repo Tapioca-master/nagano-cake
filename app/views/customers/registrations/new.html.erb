@@ -5,7 +5,6 @@
             <%= render "devise/shared/error_messages", resource: resource %>
             <h2>新規登録</h2>
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <%= render "devise/shared/error_messages", resource: resource %>
             <div class="panel panel-primary">
                 <div class="panel-heading" style="text-align: center;">
                     <b>新規登録フォーム</b>
@@ -37,7 +36,7 @@
                     <tr>
                         <div class="field">
                             <td>
-                                <%= f.label :"郵便番号（ハイフン無し7桁）" %>
+                                <%= f.label :"郵便番号(ハイフンなし7桁)" %>
                             </td>
                             <td>
                                 <%= f.text_field :postal_code, class: "text-field-lage"  %>
@@ -76,7 +75,7 @@
                     <tr>
                         <div class="field">
                             <td>
-                                <%= f.label :"パスワード" %>
+                                <%= f.label :"パスワード(6文字以上)" %>
                             </td>
                             <td>
                                 <% if @minimum_password_length %>
@@ -88,7 +87,7 @@
                     <tr>
                         <div class="field">
                             <td>
-                                <%= f.label :"パスワード（再度）" %>
+                                <%= f.label :"パスワード(再度)" %>
                             </td>
                             <td>
                                 <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "text-field-lage"  %>

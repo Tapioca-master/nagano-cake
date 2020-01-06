@@ -18,7 +18,11 @@
                     <td><%= link_to order.created_at, admins_order_path(order) %></td>
                     <td><%= "#{order.customer.name_last}#{order.customer.name_first}" %></td>
                     <!-- すべてのOrderItemの中から当該Orderでの注文個数をカウント -->
-                    <td><%= @order_items.where(order_id: order.id).size %></td>
+                        <% item_count = 0 %>
+                        <% @order_items.where(order_id: order.id).each do |order_item| %>
+                        <% item_count += order_item.amount %>
+                        <% end %>
+                    <td><%= item_count %></td>
                     <td><%= order.order_status %></td>
                 </tr>
                 <% end %>

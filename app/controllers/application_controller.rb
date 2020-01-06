@@ -5,7 +5,12 @@ class ApplicationController < ActionController::Base
 
 	def cart_count
 		if current_customer
-			@cart_count_nav = CartItem.where(customer_id: current_customer.id).count
+			cart_items = CartItem.where(customer_id: current_customer.id)
+			@cart_count_nav = 0
+			cart_items.each do |cart_item|
+				@cart_count_nav += cart_item.amount
+			end
+			@cart_count_nav
 		end
 	end
 
