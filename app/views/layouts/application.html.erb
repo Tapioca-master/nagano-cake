@@ -146,30 +146,24 @@
                 <div class="container">
                     <div class="row">
                         <!-- flash表示ここから -->
-                        <div class="row　flash text-center">
+                        <div class="row　flash text-center flash-deco">
                             <% if flash[:notice] %>
-                            <div class="flash-deco">
                                 <span class="label label-primary">
                                     <i class="fas fa-info-circle"></i>
                                     <%= flash[:notice] %>
                                 </span>
-                            </div>
                             <% end %>
                             <% if flash[:success] %>
-                            <div class="flash-deco">
                                 <span class="label label-success">
                                     <i class="fas fa-check-circle"></i>
                                     <%= flash[:success] %>
                                 </span>
-                            </div>
                             <% end %>
                             <% if flash[:danger] %>
-                            <div class="flash-deco">
                                 <span class="label label-danger">
                                     <i class="fas fa-exclamation-circle"></i>
                                     <%= flash[:danger] %>
                                 </span>
-                            </div>
                             <% end %>
                         </div>
                         <!-- flash表示ここまで -->
