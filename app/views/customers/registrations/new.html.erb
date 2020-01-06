@@ -36,7 +36,7 @@
                     <tr>
                         <div class="field">
                             <td>
-                                <%= f.label :"郵便番号（ハイフン無し7桁）" %>
+                                <%= f.label :"郵便番号(ハイフンなし7桁)" %>
                             </td>
                             <td>
                                 <%= f.text_field :postal_code, class: "text-field-lage"  %>
@@ -75,7 +75,7 @@
                     <tr>
                         <div class="field">
                             <td>
-                                <%= f.label :"パスワード（6文字以上）" %>
+                                <%= f.label :"パスワード(6文字以上)" %>
                             </td>
                             <td>
                                 <% if @minimum_password_length %>
@@ -87,7 +87,7 @@
                     <tr>
                         <div class="field">
                             <td>
-                                <%= f.label :"パスワード（再度）" %>
+                                <%= f.label :"パスワード(再度)" %>
                             </td>
                             <td>
                                 <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "text-field-lage"  %>

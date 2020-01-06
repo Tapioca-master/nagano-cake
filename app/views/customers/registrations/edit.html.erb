@@ -12,7 +12,7 @@
                 <table class="table table-bordered table-content">
                     <tr>
                         <div class="field">
-                            <th>
+                            <th class="info">
                                 <%= f.label :"メールアドレス" %><br />
                             </th>
                             <td>
@@ -27,9 +27,9 @@
                     </tr>
                     <tr>
                         <div class="field">
-                            <th>
-                                <%= f.label :"新しいパスワード"%><em>
-                                    <%= @minimum_password_length %>文字以上</em><br />
+                            <th class="info">
+                                <%= f.label :"新しいパスワード"%>
+                                   (<%= @minimum_password_length %>文字以上)<br />
                             </th>
                             <td>
                                 <%= f.password_field :password %>
@@ -41,8 +41,8 @@
                     </tr>
                     <tr>
                         <div class="field">
-                            <th>
-                                <%= f.label :"新しいパスワード（確認）" %><br />
+                            <th class="info">
+                                <%= f.label :"新しいパスワード(確認)" %><br />
                             </th>
                             <td>
                                 <%= f.password_field :password_confirmation %>
@@ -51,7 +51,7 @@
                     </tr>
                     <tr>
                         <div class="field">
-                            <th>
+                            <th class="info">
                                 <%= f.label :"現在のパスワード" %><br />
                             </th>
                             <td>
