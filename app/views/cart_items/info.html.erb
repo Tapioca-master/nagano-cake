@@ -42,7 +42,7 @@
                         <label style="padding: 5px 20px;">
                             <%= radio_button_tag :ship_address, :registered_address %>登録済み住所から選択</label><br>
                         <div style="padding: 0 0 20px 40px;">
-                            <%= select_tag(:ship_nummber, options_for_select(current_customer.addresses.collect {|a|[a.postal_code + " " + a.address + " " + a.name, a.id]}), include_blank: true) %><br>
+                            <%= select_tag(:ship_nummber, options_for_select(current_customer.addresses.collect {|a|[a.postal_code + " " + a.address + " " + a.name, a.id]}), include_blank: false) %><br>
                         </div>
                     </tr>
                     <tr>
