@@ -23,6 +23,19 @@
 
  body { padding-top: 50px; }
 
+.fourth-visual {
+    background-image: url(/assets/background3.jpg);
+}
+
+.fluid-box2 {
+    hight: 100%;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    //background-color: #ddd;
+    padding: 0px;
+}
 
 ///////// aki /////////
 .table-content th, td {
