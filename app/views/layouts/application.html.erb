@@ -141,67 +141,69 @@
         <%= link_to image_tag("/assets/logo-s.png",width: '200'), items_path %>
     </header>
     <div class="fluid-box2 fourth-visual">
-        <div class="wrapper" style="min-height: 100vh;position: relative;padding-bottom: 200px;box-sizing: border-box;" ;>
-            <div class="container">
-                <div class="row">
-                    <!-- flash表示ここから -->
-                    <div class="row　flash text-center">
-                        <% if flash[:notice] %>
-                        <p class="text-primary">
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                            <%= flash[:notice] %>
-                        </p>
-                        <% end %>
-                        <% if flash[:success] %>
-                        <p class="text-success">
-                            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-                            <%= flash[:success] %>
-                        </p>
-                        <% end %>
-                        <% if flash[:danger] %>
-                        <p class="text-danger">
-                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-                            <%= flash[:danger] %>
-                        </p>
-                        <% end %>
-                    </div>
-                    <!-- flash表示ここまで -->
-                    <%= yield %>
-                    </div>
-                </div>
-            </div>
-            <footer class="page-footer font-lage pt-4" style="position: absolute;bottom: 0;width: 100%;background-size: cover;height: 200px; background-position: 0px 400px ;background-image: url(/assets/background-image1.jpg)">
+        <div class="bg-mask-w">
+            <div class="wrapper" style="min-height: 100vh;position: relative;padding-bottom: 200px;box-sizing: border-box;" ;>
                 <div class="container">
-                    <!-- Social buttons -->
-                    <ul class="list-unstyled list-inline text-center" style="margin-top: 10px;">
-                        <li class="list-inline-item">
-                            <a class="btn-floating btn-fb mx-1">
-                                <i class="fab fa-facebook-f"> </i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="btn-floating btn-tw mx-1">
-                                <i class="fab fa-twitter"> </i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="btn-floating btn-gplus mx-1">
-                                <i class="fab fa-instagram"> </i>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="row" style="text-align: center;">
-                        <p>営業時間 / 11:00～17:00(月～金)<br>
-                            休業日 / 土曜日 日曜日 ・祝日<br>
-                            住所：〒999-9999　○○県○○市○○町○○　99-99<br>
-                            TEL：99-9999-9999<br>
-                            MAIL：sample@shop.rakuten.co.jp<br></p>
-                    </div>
-                    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                        <a href=""> NaganoCake</a>
+                    <div class="row">
+                        <!-- flash表示ここから -->
+                        <div class="row　flash text-center">
+                            <% if flash[:notice] %>
+                            <p class="text-primary">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                <%= flash[:notice] %>
+                            </p>
+                            <% end %>
+                            <% if flash[:success] %>
+                            <p class="text-success">
+                                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                                <%= flash[:success] %>
+                            </p>
+                            <% end %>
+                            <% if flash[:danger] %>
+                            <p class="text-danger">
+                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                                <%= flash[:danger] %>
+                            </p>
+                            <% end %>
+                        </div>
+                        <!-- flash表示ここまで -->
+                        <%= yield %>
+                        </div>
                     </div>
                 </div>
-            </footer>
+                <footer class="page-footer font-lage pt-4" style="position: absolute;bottom: 0;width: 100%;background-size: cover;height: 200px; background-position: 0px 400px ;background-image: url(/assets/background-image1.jpg)">
+                    <div class="container">
+                        <!-- Social buttons -->
+                        <ul class="list-unstyled list-inline text-center" style="margin-top: 10px;">
+                            <li class="list-inline-item">
+                                <a class="btn-floating btn-fb mx-1">
+                                    <i class="fab fa-facebook-f"> </i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn-floating btn-tw mx-1">
+                                    <i class="fab fa-twitter"> </i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn-floating btn-gplus mx-1">
+                                    <i class="fab fa-instagram"> </i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="row" style="text-align: center;">
+                            <p>営業時間 / 11:00～17:00(月～金)<br>
+                                休業日 / 土曜日 日曜日 ・祝日<br>
+                                住所：〒999-9999　○○県○○市○○町○○　99-99<br>
+                                TEL：99-9999-9999<br>
+                                MAIL：sample@shop.rakuten.co.jp<br></p>
+                        </div>
+                        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                            <a href=""> NaganoCake</a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
     </div>
 </body>
