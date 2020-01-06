@@ -24,11 +24,11 @@
                         <td><% order_item.each do |order_item| %>
                             <%= order_item.item.name %><br>
                             <% end %></td>
-                    　　<td>
-                        <% sum = 0 %>
-                        <% order_item.each do |order_item| %>
-                        <% sum += order_item.tax_price %>
-                        <% end %>
+                        <td>
+                          <% sum = 0 %>
+                          <% order_item.each do |order_item| %>
+                            <% sum += order_item.tax_price*order_item.amount %>
+                          <% end %>
                         <%= sum + order.shipping %>円</td>
                         <td><%= order.order_status %></td>
                         <td><%=link_to "表示する", order_path(order), class: 'btn-sm btn-primary' %></td>

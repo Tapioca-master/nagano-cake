@@ -16,7 +16,8 @@ class Customer < ApplicationRecord
          validates :postal_code, presence: true
          validates :address, presence: true
          validates :phone_number, presence: true
-         validates :is_active, presence: true
+         # validates :is_active, presence: true
+         # ブーリアン型で判別するときはpresencd:trueが必要ない(yu)
 
 
 def update_without_current_password(params, *options)
