@@ -148,22 +148,22 @@
                         <!-- flash表示ここから -->
                         <div class="row　flash text-center">
                             <% if flash[:notice] %>
-                            <p class="text-primary">
-                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            <span class="label label-primary">
+                                <i class="fas fa-info-circle"></i>
                                 <%= flash[:notice] %>
-                            </p>
+                            </span>
                             <% end %>
                             <% if flash[:success] %>
-                            <p class="text-success">
-                                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                            <span class="label label-success">
+                                <i class="fas fa-check-circle"></i>
                                 <%= flash[:success] %>
-                            </p>
+                            </span>
                             <% end %>
                             <% if flash[:danger] %>
-                            <p class="text-danger">
-                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                            <span class="label label-danger">
+                                <i class="fas fa-exclamation-circle"></i>
                                 <%= flash[:danger] %>
-                            </p>
+                            </span>
                             <% end %>
                         </div>
                         <!-- flash表示ここまで -->
