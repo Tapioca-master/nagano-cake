@@ -45,7 +45,7 @@ class Admins::OrdersController < ApplicationController
   			end
   			redirect_to admins_order_path(@order)
   		else
-  			flash[:success] = "注文ステータスを更新できませんでした"
+  			flash.now[:success] = "注文ステータスを更新できませんでした"
   			render action: :show
   		end
 
