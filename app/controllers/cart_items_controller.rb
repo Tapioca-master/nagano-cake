@@ -12,7 +12,7 @@ class CartItemsController < ApplicationController
       flash[:success] = "#{@cart_item.item.name} の数量を変更しました"
       redirect_to cart_items_path
     else
-      flash[:success] = "#{@cart_item.item.name} の数量を変更できませんでした"
+      flash[:danger] = "#{@cart_item.item.name} の数量を変更できませんでした"
       @cart_items = current_customer.cart_items
       render action: :index
     end
