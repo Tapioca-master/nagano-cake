@@ -36,7 +36,7 @@ class Admins::CustomersController < ApplicationController
       flash[:success] = "顧客情報を更新しました"
       redirect_to admins_customer_path(@customer)
     else
-      flash[:danger] = "顧客情報の更新に失敗しました"
+      flash.now[:danger] = "顧客情報の更新に失敗しました"
       render action: :edit
     end
   end

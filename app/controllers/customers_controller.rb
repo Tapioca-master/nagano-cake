@@ -23,7 +23,7 @@ class CustomersController < ApplicationController
         flash[:success] = "顧客情報を更新しました"
         redirect_to customer_path(@customer)
       else
-        flash[:danger] = "顧客情報を更新できませんでした"
+        flash.now[:danger] = "顧客情報を更新できませんでした"
         render :edit
       end
     end

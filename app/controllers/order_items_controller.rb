@@ -21,7 +21,7 @@ class OrderItemsController < ApplicationController
 			# render先に必要な情報を取得(aki)
 			@order = Order.find(id: order_item.order_id)
 			@order_items = OrderItem.where(order_id: @order.id)
-			flash[:danger] = "#{order_item.item.name} を更新できませんでした"
+			flash.now[:danger] = "#{order_item.item.name} を更新できませんでした"
 			render admins_orders_path
 		end
 	end

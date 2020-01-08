@@ -28,7 +28,7 @@ class Admins::ItemsController < ApplicationController
       flash[:success] = "商品 #{@item.name} を新規登録しました"
       redirect_to admins_item_path(@item)
     else
-      flash[:danger] = "商品を新規登録できませんでした"
+      flash.now[:danger] = "商品を新規登録できませんでした"
       render action: :new
     end
   end
@@ -47,7 +47,7 @@ class Admins::ItemsController < ApplicationController
       flash[:success] = "商品 #{@item.name} を更新しました"
       redirect_to admins_item_path(@item)
     else
-      flash[:danger] = "商品を更新できませんでした"
+      flash.now[:danger] = "商品を更新できませんでした"
       render action: :edit
     end
   end

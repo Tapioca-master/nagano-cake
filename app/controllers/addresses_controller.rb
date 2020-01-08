@@ -15,7 +15,7 @@ class AddressesController < ApplicationController
       flash[:success] = "新しい配送先を登録しました"
       redirect_to addresses_path
     else
-      flash[:danger] = "新しい配送先を登録できませんでした"
+      flash.now[:danger] = "新しい配送先を登録できませんでした"
       render action: :index
     end
   end
@@ -30,7 +30,7 @@ class AddressesController < ApplicationController
       flash[:success] = "配送先を更新しました"
       redirect_to addresses_path
     else
-      flash[:danger] = "配送先を更新できませんでした"
+      flash.now[:danger] = "配送先を更新できませんでした"
       render action: :edit
     end
   end
